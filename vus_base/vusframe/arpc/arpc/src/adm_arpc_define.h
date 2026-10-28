@@ -1,0 +1,13 @@
+#ifndef ADM_ARPC_DEFINE_H
+#define ADM_ARPC_DEFINE_H
+
+#define INIT_BUFF_SIZE			 8096
+#define DEFAULT_BUFF_SIZE        16U*1024U
+
+
+#define DEFAULT_LISTEN_BACKLOG   10240
+#define DEFAULT_MAX_CLIENT_COUNT 21     ///< 10个客户端(listen + 20个accept)
+#define DEFAULT_LISTEN_PORT      12345
+
+
+#endif // ADM_ARPC_DEFINE

@@ -1,0 +1,37 @@
+{
+    "ecuConfVersion": "configV1.0",
+    "ecus": [
+        {
+            "ecuPartNum": "1",
+            "ecuName": "MCU",
+            "ecuReqId": "0xa1021",
+            "ecuSwDid": "0xa1029",
+            "ecuResponseId": "0xabbb",
+            "ecuFunctionId": "0xa1031",
+
+            "flashType": 1,
+            "tp": 1,
+            "saMask": 1,
+            "saLibNumber": 1,
+            "flashScriptNumber": 1,
+            "isCGWRouted": 1,
+            "infoCollCtrlObj": "1",
+            "dlCtrlObj": "1",
+            "txCtrlObj": "1",
+            "instCtrlObj": "1",
+            "instCondition": 1,
+            "cycRedCheck": 1,
+            "selfRollback": 1,
+            "securityLevel": 1,
+            "isABUpgrade": 1,
+
+            "resourceDidList": [
+                {
+                    "resourceName": "softVer",
+                    "resourceDid": "0XF191",
+                    "resourceValType": 2
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,81 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    sequenceMessageAlign center
+    Gainsboro true
+    hide footbox
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+}
+
+title  **VUS检测新版本时序图** 
+hide footbox
+
+participant 触发源
+
+box "读零件版本信息" 
+participant ECM
+participant CVM
+participant DIM
+end box
+
+box "车云字段打包与解析" 
+participant CVS
+participant OCS
+end box
+
+participant 云平台
+
+触发源->CVM:触发CVM检测版本
+note left: 检测版本触发方式
+activate 触发源
+
+activate CVM
+CVM->ECM:获取车辆的配置信息
+activate ECM
+CVM<--ECM:返回车辆配置信息
+deactivate ECM
+
+loop 根据配置零件个数\n读取零件信息
+CVM->DIM:读取零件信息
+activate DIM
+CVM<--DIM:返回零件信息
+deactivate DIM
+end
+
+CVM->CVM:收集车云交互信息
+
+CVM->CVS:CVM调用CVS
+activate CVS
+CVS->OCS:序列化数据
+activate OCS
+CVS<--OCS:返回序列化数据
+deactivate OCS
+
+CVS->云平台:向云端获取新版本信息
+activate 云平台
+CVS<--云平台:下发新版本信息
+deactivate 云平台
+
+CVS->OCS:解析云端数据
+activate OCS
+CVS<--OCS:返回解析数据
+deactivate OCS
+CVS->CVS:保存下载和安装策略\n下载HMI显示文件
+CVM<-CVS:返回新版本信息
+deactivate CVS
+
+触发源<--CVM:返回新版本信息
+deactivate CVM
+deactivate 触发源
+
+@enduml
+

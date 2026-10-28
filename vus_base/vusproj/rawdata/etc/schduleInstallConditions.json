@@ -1,0 +1,65 @@
+{
+    "type": 2,
+    "conditions": [
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x30D",
+            "messageName": "童锁模式",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "1",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x309",
+            "messageName": "充电状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "1",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x331",
+            "messageName": "设防状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "1",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x31C",
+            "messageName": "电源状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "2",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        }
+    ]
+}

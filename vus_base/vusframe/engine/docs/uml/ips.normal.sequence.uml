@@ -1,0 +1,26 @@
+@startuml
+autoactivate on
+hide footbox
+title 安装常规服务
+actor ipm
+ipm -> ips: adm_ips_installProgressGet()
+ips --> ipm: ADM_IPS_INSTALL_PROGRESS_T
+ipm -> ips: adm_ips_installEcusVersionPolicyGet()
+ips --> ipm: ADM_IPS_INSTALL_ECUS_VERSION_POLICY_T
+ipm -> ips: adm_ips_installEcusDecryptPolicyGet()
+ips --> ipm: ADM_IPS_INSTALL_ECUS_DECRYPT_POLICY_T
+ipm -> ips: adm_ips_installEcusVerifySignPolicyGet()
+ips --> ipm: ADM_IPS_INSTALL_ECUS_VERIFY_SIGN_POLICY_T
+ipm -> ips: adm_ips_installEcuToBeUpgradedGet()
+ips -> ecs: 获取零件升级配置
+ecs --> ips: 配置
+ips --> ipm: ADM_IPS_INSTALL_ECUINFO_T
+ipm -> ips: adm_ips_installEcuProgressSet()
+ips --> ipm
+ipm -> ips: adm_ips_installEcuProgressGet()
+ips --> ipm: ADM_IPS_INSTALL_ECU_PROGRESS_T
+ipm -> ips: adm_ips_ecuDecryptFinish()
+ips --> ipm
+ipm -> ips: adm_ips_ecuVerifySignFinish()
+ips --> ipm
+@enduml

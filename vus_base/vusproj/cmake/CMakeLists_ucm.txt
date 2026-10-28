@@ -1,0 +1,419 @@
+cmake_minimum_required(VERSION 3.10)
+project(UCM C CXX)
+
+SET(ADM_SDK_VERSION "V2.0.0")
+
+#debug_control
+
+#set(ADM_IPS_POLICY_UPGRADE_ORDER_OLD ON)
+#ADD_DEFINITIONS(-D ADM_IPS_POLICY_UPGRADE_ORDER_OLD)
+
+
+set(DEBUG_MODULE_VERS ON)
+if (DEBUG_MODULE_VERS)
+    ADD_DEFINITIONS(-D ADM_DEBUG_MODULE_VERS)
+endif()
+
+#是否需要携带dtstool 在toolchain中配置
+if(DTS_TOOL_SWITCH)
+    ADD_DEFINITIONS(-D__MACRO_DTS_TOOL_SWITCH__)
+    set(DTS_TOOL_LIB 
+        ${CMAKE_SOURCE_DIR}/foundation/tools/tracer/lib/libdtsnode.a
+        ${CMAKE_SOURCE_DIR}/foundation/tools/tracer/lib/libadmdtsloaderwapper.a)
+else()
+    set(DTS_TOOL_LIB "")
+endif()
+
+#控制控制编译成库还是进程,并且给上库的版本号,版本号跟随主控版本不同自行修改
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Android")
+	set(COMPILE_UCM_APK_SUPPORT ON)
+else()
+	set(COMPILE_UCM_APK_SUPPORT OFF)
+endif()
+
+if (COMPILE_UCM_APK_SUPPORT)
+    ADD_DEFINITIONS(-D ADM_COMPILE_UCM_APK_SUPPORT)
+    set(UCM_APK_VERSION "V1.0.0")
+    ADD_DEFINITIONS(-DADM_UCM_APK_VERSION="${UCM_APK_VERSION}")
+endif()
+
+
+#支持并行获取零件信息
+set(PARALLEL_GET_ECU_SUPPORT ON)
+if (PARALLEL_GET_ECU_SUPPORT)
+    ADD_DEFINITIONS(-D ADM_PARALLEL_GET_ECU)
+endif()
+
+#支持激活功能
+set(ACTIVATION_FUNC_SUPPORT OFF)
+if (ACTIVATION_FUNC_SUPPORT)
+    ADD_DEFINITIONS(-D ADM_ACTIVATION_SUPPORT)
+endif()
+
+#支持事件优化
+set(REPORT_EVENT_OPTIMIZE ON)
+if (REPORT_EVENT_OPTIMIZE)
+    ADD_DEFINITIONS(-D ADM_REPORT_EVENT_OPTIMIZE)
+endif()
+# for pc x86 features macro definition
+if(CUSTOM_CMAKE_SYSTEM_NAME)
+	message("CUSTOM_CMAKE_SYSTEM_NAME:${CUSTOM_CMAKE_SYSTEM_NAME}")
+else()
+    set(CUSTOM_CMAKE_SYSTEM_NAME Linux)
+    # tracer over dlt or myself definition on mqtt+lwm2m
+    # TRACE_DLT: 
+    # TRACE_MQ: 
+    # TRACE_NONE 
+    set(CUSTOM_CMAKE_TRACE_TYPE TRACE_DLT)
+
+    # yet not support android ndk for 64bit
+    set(CUSTOM_CMAKE_TRACE_API ON)
+
+    #
+    set(USE_SYSTEM_SSL OFF)
+    set(USE_MYSELF_SSL_SHARED_LIB ON)
+
+    # base library(foundation and vrpc) type: ON: static; OFF: shared
+    set(CUSTOM_IMPORT_BASE_FULL_STATIC_LIB OFF)
+
+    # bin/etc/lib root path; MUST ben end with '/'
+    set(CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR "/tmp/admfota/admvus/")
+    # Runtime path; MUST ben end with '/'
+    set(CUSTOM_ADM_COM_ROOT_DIR "/tmp/admfota/admvus/tmp/")
+endif()
+
+################################### module compilation clipping begine ##################################
+# module enable/disable begin
+#ON: Module enable; OFF: disable
+set(CUSTOM_EWEBSERVER_SUPPORT ON)
+
+
+message("+++++++++++CUSTOM_EWEBSERVER_SUPPORT = ${CUSTOM_EWEBSERVER_SUPPORT}")
+if(CUSTOM_EWEBSERVER_SUPPORT)
+	ADD_DEFINITIONS(-D CMAKE_CUSTOM_EWEBSERVER_SUPPORT)
+
+    # add compilation file and lib
+    list(APPEND CUSTOM_SUPPORT_HEADERS ${CMAKE_SOURCE_DIR}/foundation/ewebserver/include)
+    list(APPEND CUSTOM_SUPPORT_HEADERS ${CMAKE_SOURCE_DIR}/application/tpm/inc/public)
+    list(APPEND CUSTOM_SUPPORT_LIBRARY ${CMAKE_SOURCE_DIR}/build/application/tpm/libtpm.a)
+    list(APPEND CUSTOM_SUPPORT_LIBRARY ${CMAKE_SOURCE_DIR}/foundation/ewebserver/libs/libewebsrvapi-static.a)
+endif()
+# module enable/disable end
+################################### module compilation clipping end ##################################
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -rdynamic -funwind-tables -ffunction-sections -std=gnu11  -Wl,-Map,${CMAKE_BINARY_DIR}/output.map")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -rdynamic -funwind-tables -fPIC -ffunction-sections -std=c++11  -Wl,-Map,${CMAKE_BINARY_DIR}/output.map")
+
+###########################################################SDK VERSION########################################################################
+
+# SET(MAJOR_VERSION 1)
+# SET(MINOR_VERSION 1)
+# SET(HOTFIX_VERSION 1)
+SET(PROJECT_NAME "admfotaapp")
+message("SDK_VERSION = ${SDK_VERSION}")
+SET(ADM_SDK_VERSION ${SDK_VERSION})
+
+EXECUTE_PROCESS(COMMAND date +%Y%m%d OUTPUT_VARIABLE COMPILE_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
+EXECUTE_PROCESS(COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE GIT_COMMITID OUTPUT_STRIP_TRAILING_WHITESPACE WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/application)
+
+SET(PROJECT_VERSION ${PROJECT_NAME}_${ENV_PLATFORM}_${ADM_SDK_VERSION}_${COMPILE_DATE}_${GIT_COMMITID})
+ADD_DEFINITIONS(-DADM_SDK_VERSION="${PROJECT_VERSION}")
+MESSAGE("+++++++++++PROJECT_VERSION = ${PROJECT_VERSION}")
+###########################################################SDK VERSION########################################################################
+
+option(AIR_PROTOCOL_ENCRYPT    "Air protocol encrypt"     OFF)
+option(AIR_PROTOCOL_SIGN       "Air protocol sign"  ON)
+
+option(USE_PUBLIC_V50_PLATFORM    "Use the public version 5.0 platform"     ON)
+
+option(SUPPORT_LION_PKI    "Support lion pki"     ON)
+
+if (${CLOUD_ENV} MATCHES  "test")
+    ADD_DEFINITIONS(-D CLOUD_ENV_TEST)
+    MESSAGE(STATUS "==> CLOUD_ENV_TYPE: ${CLOUD_ENV}")
+endif()
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "x86")
+	option(SUPPORT_REMOTE_AUTH "Support lion remote auth" OFF)
+else()
+	option(SUPPORT_REMOTE_AUTH "Support lion remote auth" ON)
+endif()
+
+option(AIR_PROTOCOL_VEHICLE_VERSION  "Air protocol vehicle version"     ON)
+
+if (${CLOUD_ENV} MATCHES  "test")
+    ADD_DEFINITIONS(-D CLOUD_ENV_TEST)
+    MESSAGE(STATUS "==> CLOUD_ENV_TYPE: ${CLOUD_ENV}")
+endif()
+
+if (LOG)
+    set(LOG_LEVEL 0)
+    message(STATUS "LOG:${LOG}" ";LOG_LEVEL:${LOG_LEVEL}")
+else ()
+    set(LOG_LEVEL 1)
+    message(STATUS "LOG:${LOG}" ";LOG_LEVEL:${LOG_LEVEL}")
+endif ()
+set(FOUNDATION_LIB_PATH ${CMAKE_SOURCE_DIR}/foundation/packages/libs)
+
+message("-- Foundation lib path ++++++++++" ${FOUNDATION_LIB_PATH})
+
+set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/build/deploy)
+set(CMAKE_INSTALL_BINDIR ${CMAKE_INSTALL_PREFIX}/bin)
+set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
+set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include)
+set(CMAKE_BUILD_TYPE Debug)
+
+set(EXTERNAL_LIB_BINARY_DIR ${CMAKE_BINARY_DIR}/externalLib/lib)
+file(MAKE_DIRECTORY ${EXTERNAL_LIB_BINARY_DIR})
+
+set(LIB_SHARED_SUPPORT ON)
+#set(LIB_STATIC_SUPPORT ON)
+
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(SYSTEM_LIBRARY pthread rt dl stdc++ m)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Android")
+    set(SYSTEM_LIBRARY c log stdc++ m)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Alios")
+    set(SYSTEM_LIBRARY c)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "QNX7")
+    set(SYSTEM_LIBRARY c c++ m socket)
+    set(CMAKE_CXX_STANDARD 11)
+else()
+    set(SYSTEM_LIBRARY pthread rt dl stdc++ m)
+endif()
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Android")
+	set(CUSTOME_USE_DLSYM OFF)
+
+	# soa 序列化方式, protobuf, json 可选
+	set(CUSTOM_CMAKE_SERIAL_TYPE json)
+else()
+    ADD_DEFINITIONS(-D__ADM_GNU_EXTERNAL_BACK_TRACE__)
+    set(CUSTOME_USE_DLSYM ON)
+endif()
+
+
+if(USE_SYSTEM_SSL)
+    message("+++++++++++use system ssl USE_SYSTEM_SSL = ${USE_SYSTEM_SSL}")
+    set(SSL_LIBRARY crypto ssl)
+else()
+    message("+++++++++++use project compile ssl USE_SYSTEM_SSL = ${USE_SYSTEM_SSL}")
+    
+    if(USE_MYSELF_SSL_SHARED_LIB)
+        message("+++++++++++use project compile [shared] ssl USE_MYSELF_SSL_SHARED_LIB = ${USE_MYSELF_SSL_SHARED_LIB}")
+        set(SSL_LIBRARY ${FOUNDATION_LIB_PATH}/libcrypto.so  ${FOUNDATION_LIB_PATH}/libssl.so)
+    else()
+    	message("+++++++++++use project compile [static] ssl USE_MYSELF_SSL_SHARED_LIB = ${USE_MYSELF_SSL_SHARED_LIB}")
+        set(SSL_LIBRARY ${FOUNDATION_LIB_PATH}/libcrypto-static.a ${FOUNDATION_LIB_PATH}/libssl-static.a)
+    endif()
+endif()
+
+message("+++++++++++CUSTOM_CMAKE_TRACE_TYPE = ${CUSTOM_CMAKE_TRACE_TYPE}")
+if(${CUSTOM_CMAKE_TRACE_TYPE} MATCHES "TRACE_DLT")
+	ADD_DEFINITIONS(-D__CUSTOM_TRACE_TYPE_DLT__)
+elseif($CUSTOM_CMAKE_TRACE_TYPE MATCHES "TRACE_MQ")
+	ADD_DEFINITIONS(-D__CUSTOM_TRACE_TYPE_MQ__)
+endif()
+
+message("-- CUSTOM_CMAKE_TRACE_TYPE: " ${CUSTOM_CMAKE_TRACE_TYPE})
+if(CUSTOM_CMAKE_TRACE_API)
+    message("+++++++++++use with CUSTOM_CMAKE_TRACE_API = ${CUSTOM_CMAKE_TRACE_API}")
+    ADD_DEFINITIONS(-DCUSTOM_CMAKE_TRACE_API=1)
+    set(XML_LIBRARY ${FOUNDATION_LIB_PATH}/libmxml.a)
+    # set(API_TEST_LIBRARY ${CMAKE_SOURCE_DIR}/build/tools/tracer/APITest/libapitest.so)
+    set(API_TEST_LIBRARY ${CMAKE_SOURCE_DIR}/build/tools/tracer/APITest/libapitest.a)
+else()
+    message("+++++++++++use without CUSTOM_CMAKE_TRACE_API = ${CUSTOM_CMAKE_TRACE_API}")
+    ADD_DEFINITIONS(-DCUSTOM_CMAKE_TRACE_API=0)
+    set(XML_LIBRARY "")
+    set(API_TEST_LIBRARY "")
+endif()
+
+# if(ADM_RUNTIME_ROOT_DIR)
+# 	message("+++++++++++ADM_RUNTIME_ROOT_DIR = ${ADM_RUNTIME_ROOT_DIR}") 
+# 	ADD_DEFINITIONS(-DADM_RUNTIME_ROOT_DIR="${ADM_RUNTIME_ROOT_DIR}")
+# else()
+# 	ADD_DEFINITIONS(-DADM_RUNTIME_ROOT_DIR="/tmp/admfota/admvus/tmp/")
+# endif()
+
+# someip log open/close flag 
+set(SOMEIP_LOG ON) 
+
+# vrpc log enable
+add_definitions(-D_DEBUG)
+
+
+# 是否使用dlopen, 加载实例库
+message("+++++++++++use with CUSTOME_USE_DLSYM = ${CUSTOME_USE_DLSYM}")
+if(CUSTOME_USE_DLSYM) 
+	ADD_DEFINITIONS(-D__DLSYM__) 
+endif() 
+
+if(${CUSTOM_CMAKE_SERIAL_TYPE} MATCHES "protobuf")
+	set (DIS_STATIC_LIB 
+		${CMAKE_SOURCE_DIR}/build/dim/dis/dissoa_proto_soc/libdisprotosoc.a
+		${FOUNDATION_LIB_PATH}/libprotobufd.a
+		)
+elseif(${CUSTOM_CMAKE_SERIAL_TYPE} MATCHES "json")
+	set (DIS_STATIC_LIB ${CMAKE_SOURCE_DIR}/build/dim/dis/dissoa_json_soc/libdisjsonsoc.a)
+endif()
+
+if(CUSTOME_USE_DLSYM)
+	set(DIM_LIBRARY ${CMAKE_SOURCE_DIR}/build/dim/libdim.a)
+	set(SOA_LIBRARY ${CMAKE_SOURCE_DIR}/build/soa/libsoa.a)
+	set(UIM_LIBRARY ${CMAKE_SOURCE_DIR}/build/uim/libuim.a)
+else()
+	set(DIM_LIBRARY 
+	${CMAKE_SOURCE_DIR}/build/dim/libdim.a
+	${DIS_STATIC_LIB}
+	)
+
+	set(SOA_LIBRARY 
+	${CMAKE_SOURCE_DIR}/build/soa/libsoa.a
+
+	${CMAKE_SOURCE_DIR}/build/soa/soa_impl/soa_soc_impl/libsoasoc.a
+	${CMAKE_SOURCE_DIR}/foundation/arpc/lib/libarpc-static.a
+	)
+
+	set(UIM_LIBRARY 
+	${CMAKE_SOURCE_DIR}/build/uim/libuim.a
+	${CMAKE_SOURCE_DIR}/build/uim/uis/uissoa_json_soc/libuisjsonsoc.a
+	)
+endif()
+
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "QNX7")
+    set(GTEST_LIB "")
+else()
+    set(GTEST_LIB ""
+        #${FOUNDATION_LIB_PATH}/libgtest_maind.a
+        #${FOUNDATION_LIB_PATH}/libgtestd.a
+    )
+endif()
+if(CUSTOM_IMPORT_BASE_FULL_STATIC_LIB)
+    set(FOUNDATION_LIBRARY
+    ${FOUNDATION_LIB_PATH}/libadmkvstorage.a
+
+    ${FOUNDATION_LIB_PATH}/libadmdebug.a
+    ${FOUNDATION_LIB_PATH}/libadmsbuf.a
+    ${FOUNDATION_LIB_PATH}/libjson-c.a
+    ${FOUNDATION_LIB_PATH}/libadmlog.a
+    ${FOUNDATION_LIB_PATH}/libadmvector.a
+    ${FOUNDATION_LIB_PATH}/libadmmap.a
+    ${FOUNDATION_LIB_PATH}/libadmlist.a
+    ${FOUNDATION_LIB_PATH}/libadmqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmlib.a
+    ${FOUNDATION_LIB_PATH}/libadmworkqueue.a
+
+    ${CMAKE_SOURCE_DIR}/tools/foundation/tracer/lib/libdtsnode.a
+    #${FOUNDATION_LIB_PATH}/libprotobufd.a
+    ${GTEST_LIB}
+    
+#    ${FOUNDATION_LIB_PATH}/libcurl-d.a
+    ${FOUNDATION_LIB_PATH}/libleveldb.a
+    ${FOUNDATION_LIB_PATH}/libz.a
+#    ${FOUNDATION_LIB_PATH}/libcrypto-static.a
+#    ${FOUNDATION_LIB_PATH}/libmxml.a
+#    ${FOUNDATION_LIB_PATH}/libssl-static.a
+    
+    #${CMAKE_SOURCE_DIR}/foundation/arpc/lib/libarpc-static.a
+  
+    ${FOUNDATION_LIB_PATH}/libadmos.a
+    )
+else()
+    set(FOUNDATION_LIBRARY
+    ${FOUNDATION_LIB_PATH}/libadmkvstorage.a
+
+    ${FOUNDATION_LIB_PATH}/libadmdebug.a
+    ${FOUNDATION_LIB_PATH}/libadmsbuf.a
+    ${FOUNDATION_LIB_PATH}/libjson-c.a
+    ${FOUNDATION_LIB_PATH}/libadmlog.a
+    ${FOUNDATION_LIB_PATH}/libadmvector.a
+    ${FOUNDATION_LIB_PATH}/libadmmap.a
+    ${FOUNDATION_LIB_PATH}/libadmlist.a
+    ${FOUNDATION_LIB_PATH}/libadmqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmworkqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmlib.a
+
+    ${CMAKE_SOURCE_DIR}/foundation/tools/tracer/lib/libdtsnode.a
+    #${FOUNDATION_LIB_PATH}/libprotobufd.a
+    ${GTEST_LIB}
+#    ${FOUNDATION_LIB_PATH}/libcurl-d.a
+    ${FOUNDATION_LIB_PATH}/libleveldb.a
+    ${FOUNDATION_LIB_PATH}/libz.a
+#    ${FOUNDATION_LIB_PATH}/libmxml.a
+
+    #${CMAKE_SOURCE_DIR}/foundation/arpc/lib/libarpc-static.a
+
+    ${FOUNDATION_LIB_PATH}/libadmos.a
+    )
+#     set(FOUNDATION_LIBRARY "")
+#     message("+++++++++++Error: now cannot support shared foundaton library!!!!!!!!!!!")
+endif()
+
+# find Doxygen package
+find_package(Doxygen
+	#    REQUIRED dot
+    OPTIONAL_COMPONENTS mscgen dia)
+
+
+set(CORE_LIB_DIR ${CMAKE_SOURCE_DIR}/engine/lib)
+
+file(GLOB EXTERNAL_LIB_FILES "${CORE_LIB_DIR}/*")
+file(COPY ${EXTERNAL_LIB_FILES} DESTINATION ${EXTERNAL_LIB_BINARY_DIR})
+
+# 设置Doxygen变量用于生成System interface service user manual
+set(DOXYGEN_GENERATE_HTML YES)
+set(DOXYGEN_GENERATE_MAN NO)
+
+set(DOXYGEN_PROJECT_NAME "VUS core service API user manual")
+set(DOXYGEN_PROJECT_NUMBER "V0.0.1")
+set(DOXYGEN_PROJECT_BRIEF "VUS核心服务的应用接口用户手册")
+set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/engine/core_service_API_user_manual)
+set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIRECTORY}/index.html)
+
+
+# Interface User Manual
+doxygen_add_docs(
+    core_service_API_user_manual
+    ${CMAKE_SOURCE_DIR}/foundation/platform/os/adm_typedefs.h
+    ${CMAKE_SOURCE_DIR}/engine/adm_engine_common.h
+    ${CMAKE_SOURCE_DIR}/engine/common/config/inc/adm_com_modDefine.h
+    ${CMAKE_SOURCE_DIR}/engine/common/errorCode/inc/adm_com_errorCode.h
+    ${CMAKE_SOURCE_DIR}/engine/common/lib/inc/adm_com_hash.h
+    ${CMAKE_SOURCE_DIR}/engine/common/lib/inc/adm_com_lib.h
+    ${CMAKE_SOURCE_DIR}/engine/common/lib/inc/adm_com_parseFileObject.h
+    ${CMAKE_SOURCE_DIR}/engine/common/kvstorage/inc/adm_com_kvstorage.h
+    ${CMAKE_SOURCE_DIR}/engine/cds/inc/public/adm_cds_compare.h
+    ${CMAKE_SOURCE_DIR}/engine/cvs/inc/public/adm_cvs_checkVersion.h
+    ${CMAKE_SOURCE_DIR}/engine/cvs/inc/public/adm_cvs_versionPolicy.h
+    ${CMAKE_SOURCE_DIR}/engine/dpo/inc/public/adm_dpo_download.h
+    ${CMAKE_SOURCE_DIR}/engine/dps/inc/public/adm_dps_downloadService.h
+    ${CMAKE_SOURCE_DIR}/engine/dps/inc/public/adm_dps_parsePackageConfig.h
+    ${CMAKE_SOURCE_DIR}/engine/dps/inc/public/adm_dps_parsePolicy.h
+    ${CMAKE_SOURCE_DIR}/engine/ecs/inc/public/adm_ecs_kvStorage.h
+    ${CMAKE_SOURCE_DIR}/engine/ecs/inc/public/adm_ecs_parsePolicy.h
+    ${CMAKE_SOURCE_DIR}/engine/ecs/inc/public/adm_ecs_rsConfig.h
+    ${CMAKE_SOURCE_DIR}/engine/ips/inc/public/adm_ips_install.h
+    ${CMAKE_SOURCE_DIR}/engine/irs/inc/public/adm_irs_upload.h
+    ${CMAKE_SOURCE_DIR}/engine/iss/inc/public/adm_iss_base64.h
+    ${CMAKE_SOURCE_DIR}/engine/iss/inc/public/adm_iss_hmacSha2.h
+    ${CMAKE_SOURCE_DIR}/engine/iss/inc/public/adm_iss_textAes.h
+    ${CMAKE_SOURCE_DIR}/engine/iss/inc/public/adm_iss_textRsa2048.h
+    ${CMAKE_SOURCE_DIR}/engine/pis/inc/public/adm_pis_package.h
+    ${CMAKE_SOURCE_DIR}/engine/tps/inc/public/adm_tps_transferService.h
+    ${CMAKE_SOURCE_DIR}/engine/vrs/inc/public/adm_vrs_registerManager.h
+    ${CMAKE_SOURCE_DIR}/engine/vss/inc/public/adm_vss_stateManager.h
+    ${CMAKE_SOURCE_DIR}/engine/vss/inc/public/adm_vss_stateVerify.h
+    COMMENT "VUS core service API user manual generate"
+    )
+
+add_subdirectory(soa)
+add_subdirectory(dim)
+add_subdirectory(oca)
+add_subdirectory(uim)
+add_subdirectory(application)
+#add_subdirectory(test)
+

@@ -1,0 +1,48 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    Gainsboro true
+    SequenceMessageAlign center
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+
+}
+
+start
+:IRS初始化启动;
+:创建上报消息的消息队列和线程;
+stop
+
+start
+floating note left: 当有上报消息时自动调用
+if (消息是否需要保存) then (yes)
+:KV保存消息;
+endif
+
+repeat
+:上报消息到云端;
+:解析云端返回消息，上报是否成功;
+repeat while (上报是否成功 && 是否到达重试次数?)
+
+if ((消息是否需要保存 && 上报已经成功) || 消息多次上报失败满足删除条件) then (yes)
+:KV删除消息;
+endif
+stop
+
+start
+floating note left: 应用层添加上报消息时调用
+:传入消息数据、消息类型、是否需要保存;
+:以时间戳作为该消息的key;
+:消息信息添加到上报的队列中;
+stop
+
+@enduml
+

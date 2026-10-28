@@ -1,0 +1,603 @@
+{
+    "downConditions": [
+        {
+            "type": 1,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 2,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 3,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 4,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 5,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        }
+    ],
+    "transferConditions": [
+        {
+            "type": 1,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 2,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 3,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 4,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        },
+        {
+            "type": 5,
+            "conditions": [
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0001",
+                    "messageName": "",
+                    "messageDesc": "",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 2,
+                            "dataLength": 4,
+                            "data": "64",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0x0002",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 3,
+                            "data": "128",
+                            "connectRelation": 1
+                        }
+                    ],
+                    "connectRelation": 1
+                },
+                {
+                    "serviceType": "0X1001",
+                    "messageId": "0X0003",
+                    "expressions": [
+                        {
+                            "logic": 3,
+                            "dataType": 6,
+                            "dataLength": 5,
+                            "data": "hello",
+                            "connectRelation": 2
+                        }
+                    ],
+                    "connectRelation": 1
+                }
+            ]
+        }
+    ],
+    "downEcuInfos": [
+        {
+            "ecuReqId": "0X16E2",
+            "ecuSwDid": "0XD001",
+            "srcPkg": {
+                "pkgType": 2,
+                "srcVer": "V1.0",
+                "dstVer": "V2.0",
+                "pkgFile": {
+                    "fileName": "partPkg-src-merge-sign-en",
+                    "url": "http://1.116.125.96:8080/data/partPkg-src-merge-sign-en",
+                    "hash": "da7c21a3dba1093b0967bd2e361261074d16049825695637bef15f69df0c75cb",
+                    "size": 146709712,
+                    "fileSecurityInfo": {
+                        "isEncrypt": 1,
+                        "oriHash": "a15b7eb3974891b4e7146e2b4137a011f3af83ac6c6d24575ab37f6b516c7710",
+                        "oriSize": 146707479,
+                        "pkgKey": "2566122276204952906874e341f156b8",
+                        "segmentDecryptLen": 1048576,
+                        "fileMetas": [
+                            {
+                                "size": 146705767,
+                                "checkSum": {
+                                    "algorithm": 3,
+                                    "value": "1d31e854519da941577e4e0718b61f04130fa44b41d2650a09378c0367f3550f"
+                                },
+                                "type": 1
+                            },
+                            {
+                                "size": 1712,
+                                "checkSum": {
+                                    "algorithm": 3,
+                                    "value": "a7e676278c93db4f985ad7f53a3e024c7b71f201402f28af3f60ed8e64ee1e3b"
+                                },
+                                "type": 2
+                            }
+                        ]
+                    }
+                }
+            },
+            "dstPkg": {
+                "pkgType": 2,
+                "srcVer": "V1.0",
+                "dstVer": "V2.0",
+                "pkgFile": {
+                    "fileName": "partPkg-dst-merge-sign-en",
+                    "url": "http://1.116.125.96:8080/data/partPkg-dst-merge-sign-en",
+                    "hash": "da7c21a3dba1093b0967bd2e361261074d16049825695637bef15f69df0c75cb",
+                    "size": 146709712,
+                    "fileSecurityInfo": {
+                        "isEncrypt": 1,
+                        "oriHash": "a15b7eb3974891b4e7146e2b4137a011f3af83ac6c6d24575ab37f6b516c7710",
+                        "oriSize": 146707479,
+                        "pkgKey": "2566122276204952906874e341f156b8",
+                        "segmentDecryptLen": 1048576,
+                        "fileMetas": [
+                            {
+                                "size": 146705767,
+                                "checkSum": {
+                                    "algorithm": 3,
+                                    "value": "1d31e854519da941577e4e0718b61f04130fa44b41d2650a09378c0367f3550f"
+                                },
+                                "type": 1
+                            },
+                            {
+                                "size": 1712,
+                                "checkSum": {
+                                    "algorithm": 3,
+                                    "value": "a7e676278c93db4f985ad7f53a3e024c7b71f201402f28af3f60ed8e64ee1e3b"
+                                },
+                                "type": 2
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "ecuReqId": "0X16E3",
+            "ecuSwDid": "0XD002",
+            "dstPkg": {
+                "pkgType": 1,
+                "dstVer": "V3.0",
+                "pkgFile": {
+                    "fileName": "partOtherPkg-dst-merge-sign-en",
+                    "url": "http://1.116.125.96:8080/data/partOtherPkg-dst-merge-sign-en",
+                    "hash": "da7c21a3dba1093b0967bd2e361261074d16049825695637bef15f69df0c75cb",
+                    "size": 146709712,
+                    "fileSecurityInfo": {
+                        "isEncrypt": 1,
+                        "oriHash": "a15b7eb3974891b4e7146e2b4137a011f3af83ac6c6d24575ab37f6b516c7710",
+                        "oriSize": 146707479,
+                        "pkgKey": "2566122276204952906874e341f156b8",
+                        "segmentDecryptLen": 1048576,
+                        "fileMetas": [
+                            {
+                                "size": 146705767,
+                                "checkSum": {
+                                    "algorithm": 3,
+                                    "value": "1d31e854519da941577e4e0718b61f04130fa44b41d2650a09378c0367f3550f"
+                                },
+                                "type": 1
+                            },
+                            {
+                                "size": 1712,
+                                "checkSum": {
+                                    "algorithm": 3,
+                                    "value": "a7e676278c93db4f985ad7f53a3e024c7b71f201402f28af3f60ed8e64ee1e3b"
+                                },
+                                "type": 2
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,180 @@
+@startuml
+
+start
+note
+待升级（含回滚）零件获取
+end note
+if(当前升级回滚中?) then(是)
+    if(待回滚零件获取) then(失败)
+        if(最后的回滚零件?) then(是)
+            :待升级零件循环获取;
+        else(否)
+            :往下一组跳转;
+            :待回滚零件获取;
+        endif
+    endif
+else(否)
+    if(待升级零件获取) then(失败)
+        if(回滚零件寻找) then(失败)
+            :待升级零件循环获取;
+        else(成功)
+            :回滚零件生成;
+        endif
+    endif
+endif
+if(存在待升级（含回滚）零件) then(是)
+    :零件信息填充;
+endif
+
+stop
+
+start
+note
+待升级零件循环获取
+end note
+:往下一组跳转;
+while(已遍历最后的升级零件?) is (否)
+    if(待升级零件获取) then(成功)
+        break
+    endif
+    :往下一组跳转;
+endwhile(是)
+
+stop
+
+start
+note
+待回滚零件获取
+end note
+:往初始位置跳转;
+while(最终升级零件已遍历?) is(否)
+    if(状态是PRE_INSTALL_ROLLBACK?) then(是)
+        :状态设为INSTALL_ROLLBACK;
+        :标记为回滚零件;
+    elseif(状态是INSTALL_ROLLBACK?) then(是)
+        :标记为回滚零件;
+    endif
+endwhile(是)
+:标记回滚零件返回;
+
+stop
+
+start
+note
+待升级零件获取
+end note
+:往初始位置跳转;
+while(最终升级零件已遍历?) is(否)
+    if(状态是PRE_INSTALL?) then(是)
+        :状态设为PHASE_INSTALL;
+        :标记为升级零件;
+    elseif(状态是PHASE_INSTALL?) then(是)
+        :标记为升级零件;
+    elseif(状态是INSTALL_RETENTION?) then(是)
+        if(留置已跳过?) then(否)
+            :标记为升级零件（带留置标识）;
+        endif
+    endif
+endwhile(是)
+:标记升级零件返回;
+
+stop
+
+start
+note
+回滚零件生成
+end note
+:往最后一组跳转;
+while(初始升级零件已遍历?) is(否)
+    if(次序大于待升级) then(是)
+        :未安装迁移至回滚完成;
+    elseif(次序等于待升级) then(是)
+        :当前零件待回滚;
+    else(次序小于待升级)
+        :回滚组内升级完成零件待回滚;
+    endif
+    if(存在待回滚零件?) then(是)
+        :加入待回滚表;
+    endif
+    :往上一组跳转;
+endwhile(是)
+
+stop
+
+start
+note
+未安装迁移至回滚完成
+end note
+:往第一组跳转;
+while(最终升级零件已遍历?) is(否)
+    if(与待回滚零件共同回滚组?) then(是)
+        if(状态是PRE_INSTALL?) then(是)
+            :状态设为POST_INSTALL_ROLLBACK;
+        elseif(状态是INSTALL_RETENTION?) then(是)
+            :标记留置跳过;
+        endif
+    endif
+    :往下一组跳转;
+endwhile(是)
+
+stop
+
+start
+note
+回滚组内升级完成零件待回滚
+end note
+:往第一组跳转;
+while(最终升级零件已遍历?) is(否)
+    if(与待回滚零件共同回滚组?) then(是)
+        if(状态是POST_INSTALL?) then(是)
+            :状态设为PRE_INSTALL_ROLLBACK;
+        endif
+    endif
+    :往下一组跳转;
+endwhile(是)
+
+stop
+
+start
+note
+零件升级进度（含结果）设定
+end note
+if(升级结果?) then(是)
+    if(回滚零件?) then(是)
+        :回滚次数递增;
+	if(状态是INSTALL_ROLLBACK?) then(是)
+            if(结果是成功?) then(是)
+                :状态设为POST_INSTALL_ROLLBACK;
+            else(否)
+                if(回滚重试完成?) then(是)
+                    :状态设为POST_INSTALL_ROLLBACK;
+                endif
+            endif
+        endif
+    else(否)
+        :升级次数递增;
+	if(状态是PHASE_INSTALL?) then(是)
+            if(结果是成功?) then(是)
+                :状态设为POST_INSTALL;
+            else(否)
+                if(升级重试完成?) then(是)
+                    :状态设为POST_INSTALL;
+                    if(需要回滚?) then(是)
+                        :状态设为PRE_INSTALL_ROLLBACK;
+                    endif
+                endif
+            endif
+        elseif(状态是INSTALL_RETENTION?) then(是)
+            :标记留置已跳过;
+        endif
+    endif
+    :更新零件升级结果;
+else(否)
+    :更新零件升级进度;
+    :更新整体升级进度;
+    :更新整体升级剩余时长;
+endif
+
+stop
+
+@enduml

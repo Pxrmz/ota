@@ -1,0 +1,42 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    Gainsboro true
+    SequenceMessageAlign center
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+
+}
+
+start
+floating note left: 启动周期上报时，\n调用此回调函数
+while(是否在周期上报中)
+:加锁;
+floating note left: 依次遍历车辆状态、\nECU状态、进度、事件的报文
+while (此类报文是否有缓存)
+:读取此类报文的头尾节点;
+:根据报文类型和尾结点的索引生成写数据库的KEY;
+:根据KEY读取缓存报文;
+if (上报报文到云端) then (yes)
+    :删除报文体;
+    :尾节点向前推进，头结点不变;
+else(no)
+:跳出循环;
+endif
+endwhile
+:更新此类报文头尾节点到数据库;
+
+:解锁;
+:等待周期时间;
+endwhile
+stop
+@enduml
+

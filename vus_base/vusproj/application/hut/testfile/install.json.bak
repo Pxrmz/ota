@@ -1,0 +1,109 @@
+{
+  "isContinueUpgrade": 1,
+  "upgradeRetryCount": 1,
+  "rollbackRetryCount": 1,
+  "isForceUpgrade": 0,
+  "isAllowDstVer": 0,
+  "dependType": 1,
+  "upgradePreCondition": {
+    
+  },
+  "upgradeConditions": [
+    {
+      "upgradeType": 1,
+      "conditions": [
+        {
+          "messageId": 1,
+          "variableName": "电池电量",
+          "conditionDesc": "电池电量",
+          "connectRelation": 1,
+          "logic": 1,
+          "dataType": 1,
+          "dataLength": 2,
+          "data": "80"
+        },
+        {
+          "messageId": 2,
+          "variableName": "电子刹车",
+          "conditionDesc": "电子刹车",
+          "connectRelation": 1,
+          "logic": 1,
+          "dataType": 1,
+          "dataLength": 2,
+          "data": "1"
+        }
+      ]
+    }
+  ],
+  "ecusInfo": [
+    {
+      "ecuName": "IVI",
+      "ecuPartNum": "123",
+      "ecuReqId": "0X7B4",
+      "ecuSwDid": "0XF187",
+      "ecuTimeConsuming": 6,
+      "ecuTimeOut": 8,
+      "srcVer": "V1.0",
+      "dstVer": "V2.0",
+      "dependencies": [
+        {
+          "ecuPartNum": "124",
+          "ecuReqId": "0X700",
+          "ecuSwDid": "0XF187",
+          "ecuSVer": "V1.0"
+        }
+      ],
+      "srcPkg": {
+        "packageType": 1,
+        "dstVer": "V1.0",
+        "description": "修复缺陷"
+      },
+      "dstPkg": {
+        "packageType": 2,
+        "srcVer": "V1,0",
+        "dstVer": "V2.0",
+        "description": "修复缺陷"
+      }
+    },
+    {
+      "ecuName": "TBOX",
+      "ecuPartNum": "124",
+      "ecuReqId": "0X700",
+      "ecuSwDid": "0XF187",
+      "ecuTimeConsuming": 6,
+      "ecuTimeOut": 8,
+      "srcVer": "V1.0",
+      "dstVer": "V2.0",
+      "dependencies": [
+        
+      ],
+      "srcPkg": {
+        "packageType": 1,
+        "dstVer": "V1.0",
+        "description": "修复缺陷"
+      },
+      "dstPkg": {
+        "packageType": 1,
+        "dstVer": "V2.0",
+        "description": "修复缺陷"
+      }
+    }
+  ],
+  "strategyTimeConsuming": 12,
+  "ecusGroupOrder": [
+    {
+      "ecuPartNum": "123",
+      "ecuReqId": "0X7B4",
+      "ecuSwDid": "0XF187",
+      "upgradeOrder": 1,
+      "groupFlag": 1
+    },
+    {
+      "ecuPartNum": "124",
+      "ecuReqId": "0X700",
+      "ecuSwDid": "0XF187",
+      "upgradeOrder": 2,
+      "groupFlag": 2
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+#ifndef ADM_APPLICATION_COMMON_H
+#define ADM_APPLICATION_COMMON_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Progress type value for version check.
+ *
+ */
+typedef enum 
+{
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_START = 1, /*!< Start check */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_GET_REGISTER_INFO, /*!< Get register info, deviceId, secret, etc */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_GET_CONFIG_INFO, /*!< Get config info, ECU config & General config */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_GET_ECUINFO, /*!< To get every ECU information, it needs to be thrown */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_GET_NET_INFO, /*!< Get network info */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_SIGNED, /*!< Sign the message requesting check */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_ENCRYPT, /*!< Encrypt the message of check requesting */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_REQUEST_TO_SERVER, /*!< Request server to check version */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_RESP_FROM_SERVER, /*!< Response message from server */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_DECRYPT, /*!< Decrypt the message of check response */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_VERIFY_SIGN, /*!< Verify signature of check response message */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_END, /*!< End check */
+    ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_INVALID /*!< Invalid */
+} ADM_APPLICATION_COMMON_CHECK_PROGRESS_TYPE_T;
+
+/**
+ * @biref 检测版本的触发方式
+ *
+ */
+typedef enum
+{
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_USER = 1, /**!< User click by HUT */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_IGN, /**!< IGN */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_TSP, /**!< TSP push */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_PHONE, /**!< User click by phone */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_CYCLE, /**!< Cycle */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_SCHDULE, /**!< Schdule */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_SILENCE, /**!< Silence */
+	ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_USB = 11, /* usb模式 */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_RESCUE = 12,  /* 救援升级 */ 
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_PROD_LINE = 13, /* 产线升级模式 */ 
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_APK_SELF_UPGRADE = 14,    /* APK 自升级*/
+    ADM_APPLICATION_COMMON_CMDID_TYPE_TRIGGER_FORCE  = 15,      /* 强制升级 */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_SCHDULE_RESULT = 998, /**!< 预约结果 */
+    ADM_APPLICATION_COMMON_CMDID_TYPE_INVALID = 999 /**!< Invalid */
+} ADM_APPLICATION_COMMON_CMDID_TYPE_E;
+
+/**
+ * @brief Type of schdule install.
+ * 
+ */
+typedef enum ADM_UIM_SOA_INSTALL_SCHDULE_TYPE_ {
+    ADM_UIM_SOA_INSTALL_SCHDULE_TYPE_NOW = 0,           /**!< 手机APP触发立即升级 */
+    ADM_UIM_SOA_INSTALL_SCHDULE_TYPE_SCHDULED = 1,      /**!< Schdule or Reschdule */
+    ADM_UIM_SOA_INSTALL_SCHDULE_TYPE_CANCELED,          /**!< Cancel schdule */
+    ADM_UIM_SOA_INSTALL_SCHDULE_TYPE_INVALID            /**!< Invalid */
+} ADM_UIM_SOA_INSTALL_SCHDULE_TYPE_E;
+
+/**
+ * @brief 预约安装来源枚举值
+ * @note
+ */
+typedef enum
+{
+    ADM_APPLICATION_SCHEDULE_INSTALL_APP = 1,           /** APP预约升级 */
+    ADM_APPLICATION_SCHEDULE_INSTALL_HMI = 2,           /** HMI预约升级 */
+    ADM_APPLICATION_SCHEDULE_INSTALL_INVALID = 999      /** 无效值 */
+} ADM_APPLICATION_SCHEDULE_INSTALL_SOURCE_E;
+
+/**
+ * @brief 预约安装操作类型
+ * @note
+ */
+typedef enum
+{
+    ADM_APPLICATION_SCHEDULE_INSTALL_CREATE = 1,        /** 创建 */
+    ADM_APPLICATION_SCHEDULE_INSTALL_QUERY = 2,           /** 查询 */
+    ADM_APPLICATION_SCHEDULE_INSTALL_EDIT = 3,           /** 编辑 */
+    ADM_APPLICATION_SCHEDULE_INSTALL_REMOVE = 4,           /** 删除 */
+    ADM_APPLICATION_SCHEDULE_INSTALL_OPR_INVALID = 999      /** 无效值 */
+} ADM_APPLICATION_SCHEDULE_INSTALL_OPERATE_E;
+
+/** TBOX远程诊断状态枚举值 */
+typedef enum
+{
+    REMOTE_DIA_NOT_READ,
+    REMOTE_DIA_START_READ,
+    REMOTE_DIA_READING,
+    REMOTE_DIA_END_READ
+} ADM_APPLICATION_COMMON_REMOTE_DIA_E;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

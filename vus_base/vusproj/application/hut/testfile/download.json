@@ -1,0 +1,137 @@
+{
+    "maxDownload": 3,
+    "downloadExpire": 3,
+    "autoDownload": 1,
+    "downNote": "下载提示语",
+    "segmentDecryptLen": 10,
+    "functionalSafetyScript": {
+        "description": "script description",
+        "scriptUrl": "xxx",
+        "scriptHash": "xxxxxx",
+        "scriptSize": 1712
+    },
+    "downloadConditions": [
+        {
+            "type": 1,
+            "conditions": [
+                {
+                    "messageId": 1,
+                    "variableName": "netType",
+                    "conditionDesc": "selectDownloadNetType",
+                    "logic": 3,
+                    "dataType": 1,
+                    "dataLength": 1,
+                    "data": 1,
+                    "connectRelation": 1
+                },
+                {
+                    "messageId": 2,
+                    "variableName": "allowCarEMode",
+                    "conditionDesc": "isAllowCarEMode",
+                    "logic": 3,
+                    "dataType": 1,
+                    "dataLength": 1,
+                    "data": 1,
+                    "connectRelation": 1
+                },
+                {
+                    "messageId": 3,
+                    "variableName": "allowCarCrash",
+                    "conditionDesc": "isAllowCarCrash",
+                    "logic": 3,
+                    "dataType": 1,
+                    "dataLength": 1,
+                    "data": 1,
+                    "connectRelation": 1
+                },
+                {
+                    "messageId": 4,
+                    "variableName": "allowConnectOBD",
+                    "conditionDesc": "isAllowConnectOBD",
+                    "logic": 3,
+                    "dataType": 1,
+                    "dataLength": 1,
+                    "data": 1,
+                    "connectRelation": 1
+                },
+                {
+                    "messageId": 5,
+                    "variableName": "batteryPowerMin",
+                    "conditionDesc": "batteryPowerMinInDownload",
+                    "logic": 2,
+                    "dataType": 1,
+                    "dataLength": 1,
+                    "data": 90,
+                    "connectRelation": 1
+                }
+            ]
+        }
+    ],
+    "downPackageType": 1,
+    "downPackageInfo": [
+        {
+            "packagePartNum": 1,
+            "packageName": "IVI",
+            "hash": {
+                "isEncrypt": 0,
+                "oriHash": "0d5451e8f729339dc31e6d763b6ee6b12fab9e63a55b8a480fdc7eacb5f50099"
+            },
+            "originSize": 5300,
+            "signSize": 50,
+            "size": 5350,
+            "verUrl": "http://172.16.30.56:8080/downMPU.zip"
+        }
+    ],
+    "ecusInfos": [
+        {
+            "dependencies": [],
+            "dstPkg": {
+                "description": "IVI",
+                "dstVer": "V2.0",
+                "hash": {
+                    "isEncrypt": 0,
+                    "oriHash": "feda25d2c28498a0322661054a36b49cc756d5c101d6117fa198ece3fd415e16",
+                    "encHash": "96220d8160f1a3bf459d963386161e78c890a672361a694a80d7bc6ec4ba4cd8",
+                    "pkgKey": "86a0b84b92f84513bc8402d447e2c35a",
+                    "segmentDecryptLen": 1230
+                },
+                "originSize": 5000,
+                "packageType": 1,
+                "signSize": 1712,
+                "size": 104857600,
+                "verUrl": "http://172.16.30.56:8080/downIVI.zip"
+            },
+            "srcVer": "V1.0",
+            "dstVer": "V2.0",
+            "ecuReqId": "0X7B4",
+            "ecuSwDid": "0XF187",
+            "ecuName": "IVI",
+            "ecuPartNum": "123"
+        },
+        {
+            "dependencies": [],
+            "dstPkg": {
+                "description": "TBOX",
+                "dstVer": "V2.0",
+                "hash": {
+                    "isEncrypt": 0,
+                    "oriHash": "feda25d2c28498a0322661054a36b49cc756d5c101d6117fa198ece3fd415e16",
+                    "encHash": "96220d8160f1a3bf459d963386161e78c890a672361a694a80d7bc6ec4ba4cd8",
+                    "pkgKey": "86a0b84b92f84513bc8402d447e2c35a",
+                    "segmentDecryptLen": 1230
+                },
+                "originSize": 5000,
+                "packageType": 1,
+                "signSize": 1712,
+                "size": 115343360,
+                "verUrl": "http://172.16.30.56:8080/downTBOX.zip"
+            },
+            "srcVer": "V1.0",
+            "dstVer": "V2.0",
+            "ecuReqId": "0X700",
+            "ecuSwDid": "0XF187",
+            "ecuName": "TBOX",
+            "ecuPartNum": "124"
+        }
+    ]
+}

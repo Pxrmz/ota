@@ -1,0 +1,11 @@
+set(CMAKE_SYSTEM_NAME Linux)
+
+set(CUSTOM_CMAKE_SYSTEM_NAME Linux)
+
+set(CUSTOM_CMAKE_XML_NAME MXML)
+
+#是否使用系统的SSL库，ON使用系统的；OFF使用工程生成的
+set(USE_SYSTEM_SSL OFF)
+
+set(USE_DYNAMIC_SSL_LIB ON)
+

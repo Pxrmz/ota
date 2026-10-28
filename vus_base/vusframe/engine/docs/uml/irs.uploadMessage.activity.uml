@@ -1,0 +1,46 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    Gainsboro true
+    SequenceMessageAlign center
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+
+}
+
+start
+floating note left: 应用层添加上报消息时调用
+:传入报文体和报文类型;
+:报文体和报文类型添加到上报的队列中;
+stop
+
+start
+floating note left: 当有上报消息时，\n自动调用线程的回调函数，\n传入报文类型和报文体
+:加锁;
+:根据报文类型，从数据库中读取此类报文的头尾节点;
+:根据报文类型和头结点的索引生成写数据库的KEY;
+if (保存报文体到数据库中) then (yes)
+:头结点向前进移动一次，尾节点不变;
+:保存头尾结点到数据库中;
+:临时记录保存报文到数据库成功的标志;
+endif
+
+if (上报报文到云端) then (yes)
+    if (根据标志判断报文是否成功保存到数据库) then (yes)
+    :删除报文体;
+    :头结点回退一次，尾节点不变;
+    :更新头尾结点到数据库中;
+    endif
+endif
+:解锁;
+stop
+@enduml
+

@@ -1,0 +1,27 @@
+# test config for ipm module open/close flag
+set(DEBUG_IPM_TEMP OFF) 
+message("===> debug ipm temp = ${DEBUG_IPM_TEMP}") 
+if(DEBUG_IPM_TEMP)
+    ADD_DEFINITIONS(-D ADM_IPM_TEMP) 
+endif()
+
+#ipm trigger get signal 
+set(DEBUG_IPM_SINGANL OFF)
+message("===> debug ipm signal = ${DEBUG_IPM_SINGANL}")
+if(DEBUG_IPM_SINGANL)
+    ADD_DEFINITIONS(-D ADM_IPM_SIGNAL)
+endif()
+
+# debug dpm module open/close flag
+set(DEBUG_CVM_MODULE OFF) 
+set(DEBUG_DPM_MODULE OFF) 
+
+message("===> debug cvm module = ${DEBUG_CVM_MODULE}") 
+if(DEBUG_CVM_MODULE)
+    ADD_DEFINITIONS(-D ADM_DEBUG_CVM_MODULE) 
+endif()
+
+message("===> debug dpm module = ${DEBUG_DPM_MODULE}") 
+if(DEBUG_DPM_MODULE)
+    ADD_DEFINITIONS(-D ADM_DEBUG_DPM_MODULE) 
+endif()

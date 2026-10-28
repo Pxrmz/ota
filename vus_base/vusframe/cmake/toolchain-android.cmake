@@ -1,0 +1,4 @@
+set(CMAKE_SYSTEM_NAME Linux)
+
+set(CUSTOM_CMAKE_SYSTEM_NAME Android)
+

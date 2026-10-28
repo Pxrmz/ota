@@ -1,0 +1,55 @@
+# !/bin/bash
+
+PROJECT_NAME="VUS Client SDK Reference Manual"
+PROJECT_NUMBER="v0.1.0"
+
+trap cleanup EXIT INT TERM
+
+# Full path of this script
+THIS=`readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0`
+# This directory path of this script
+THIS_DIR=`dirname "${THIS}"`
+
+ROOTPROJ_DIR=${THIS_DIR}/../../
+
+. $THIS_DIR/bash_helper.sh
+
+TMP_SRCS_DIR=`mktemp -d`
+TMP_DOXYCONFIG=`mktemp`
+OUTPUT_DIRECTORY=$(normalize_path ${THIS_DIR}/doc)
+
+#cd ${THIS_DIR}/../
+#for file in `find . -name "include"`
+#do
+# cp $file/* $TMP_SRCS_DIR -a
+#done
+#echo $THIS_DIR + "2222222"
+#rm -fr $TMP_SRCS_DIR/TinyXML2.h
+
+cd $TMP_SRCS_DIR
+rm ${THIS_DIR}/include/*
+# cp ${THIS_DIR}/include/* $TMP_SRCS_DIR -a
+cp ${ROOTPROJ_DIR}/platform/os/inc/* ${THIS_DIR}/include -a
+# cp ${ROOTPROJ_DIR}/libs/inc/* ${THIS_DIR}/include -a
+cp ${THIS_DIR}/include/* $TMP_SRCS_DIR -a
+
+#cd $TMP_SRCS_DIR
+#sed -i -r 's/^DM_API_PUBLIC[(](extern[ ]+.*)[)][ ]*([a-zA-Z_0-9]+[(])/\1 \2/g' `ls $TMP_SRCS_DIR`
+
+# generate the new doxygen config file
+cat ${THIS_DIR}/doxyconfig > $TMP_DOXYCONFIG
+sed -i -r "s|(PROJECT_NAME[ ]*=[ ]*)(.*)|\1\"$PROJECT_NAME\"|g" $TMP_DOXYCONFIG
+sed -i -r "s|(PROJECT_NUMBER[ ]*=[ ]*)(.*)|\1\"$PROJECT_NUMBER\"|g" $TMP_DOXYCONFIG
+sed -i -r "s|(OUTPUT_DIRECTORY[ ]*=[ ]*)(.*)|\1\"${OUTPUT_DIRECTORY}\"|g" $TMP_DOXYCONFIG
+sed -i -r "s|(INPUT[ ]*=[ ]*)(.*)|\1\"${TMP_SRCS_DIR}\"|g" $TMP_DOXYCONFIG
+
+doxygen $TMP_DOXYCONFIG
+
+cd ${THIS_DIR}/doc/latex/
+make
+
+cleanup() {
+    echo "!!! Exit !!!"
+    #rm -fr $TMP_SRCS_DIR
+    rm -fr $TMP_DOXYCONFIG
+}

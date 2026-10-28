@@ -1,0 +1,349 @@
+{
+	"status": 1000,
+	"msg": "³É¹¦",
+	"sign": "7fef2f6e71dabcd2c09959aebe0c43ff370855e5176f8ae6b5a28fe27a7286a1",
+	"timestamp": 1639642026,
+	"data": {
+		"sessionId": "16396420260384dxb4tyt",
+		"taskId": 382,
+		"strategyId": 1014,
+		"versionNumber": "V3.9",
+		"upgradeMode": 1,
+		"hmiPolicy": {
+			"hmiFile": {
+				"fileName": "dzrEDmR4.zip",
+				"url": "http://otadown-dev.evergrandeauto.com/download/image/dzrEDmR4.zip",
+				"hash": "55ff732c05cf6f294315c74a47721d2b991db83b685f9de42cc5f83ac6bd8fbc",
+				"size": 323
+			},
+			"hmiInfo": {
+				"vehicleVersionInfo": {
+					"vehicleVersion": "V3.9",
+					"totalSize": 105706192
+				},
+				"ecuInfos": [{
+					"ecuPartNum": "0X01",
+					"ecuReqId": "0X16E2",
+					"ecuSwDid": "0XD001",
+					"ecuVersion": "V2.0.1",
+					"ecuSize": 75395064
+				}]
+			}
+		},
+		"downPolicy": {
+			"downConditions": [],
+			"transferConditions": [],
+			"downPkgInfos": [{
+				"pkgFile": {
+					"fileName": "e0c692f70f444a52b0213f53ebc4efa5.zip",
+					"url": "http://otadown-dev.evergrandeauto.com/download/package/bigstrategy/1014/e0c692f70f444a52b0213f53ebc4efa5.zip",
+					"hash": "c292b8ffdacebaa95cb8925f30a670f0c367892a622ee982dd40439c469c3896",
+					"size": 105706192,
+					"fileSecurityInfo": {
+						"pkgKey": "f411c07be2dc46fbbd1d42c14cc66f91"
+					}
+				},
+				"ecuInfos": [{
+					"ecuPartNum": "0X01",
+					"ecuReqId": "0X16E2",
+					"ecuSwDid": "0XD001",
+					"srcPkgName": "filedownf0a5b14020b6450090ec0ad40ca5576c.zip",
+					"dstPkgName": "filedowncb5a6393f9dc4ffd864b53f703d8589e.zip"
+				}]
+			}]
+		},
+		"installPolicy": {
+			"upgradeRetryCount": 1,
+			"rollbackRetryCount": 1,
+			"upgradeConditions": [{
+				"type": 1,
+				"conditions": [{
+					"messageId": "powerStatus",
+					"expressions": [{
+						"logic": 3,
+						"data": "1",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 2,
+						"dataLength": 20,
+						"data": "shouqian",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "carSpeed",
+					"expressions": [{
+						"logic": 3,
+						"data": "0",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0003",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 1,
+						"data": "1",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0002",
+					"expressions": [{
+						"logic": 2,
+						"dataType": 1,
+						"dataLength": 3,
+						"data": "81",
+						"connectRelation": 1
+					}, {
+						"logic": 6,
+						"dataType": 1,
+						"dataLength": 3,
+						"data": "99",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0001",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 1,
+						"data": "1",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "vehicleStatus",
+					"expressions": [{
+						"logic": 3,
+						"data": "1",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "gear",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 11,
+						"data": "0",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}]
+			}, {
+				"type": 2,
+				"conditions": [{
+					"messageId": "powerStatus",
+					"expressions": [{
+						"logic": 3,
+						"data": "1",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 2,
+						"dataLength": 20,
+						"data": "shouqian",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "carSpeed",
+					"expressions": [{
+						"logic": 3,
+						"data": "0",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0003",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 1,
+						"data": "1",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0002",
+					"expressions": [{
+						"logic": 2,
+						"dataType": 1,
+						"dataLength": 3,
+						"data": "81",
+						"connectRelation": 1
+					}, {
+						"logic": 6,
+						"dataType": 1,
+						"dataLength": 3,
+						"data": "99",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0001",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 1,
+						"data": "1",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "vehicleStatus",
+					"expressions": [{
+						"logic": 3,
+						"data": "1",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "gear",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 11,
+						"data": "0",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}]
+			}, {
+				"type": 5,
+				"conditions": [{
+					"messageId": "powerStatus",
+					"expressions": [{
+						"logic": 3,
+						"data": "1",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 2,
+						"dataLength": 20,
+						"data": "shouqian",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "carSpeed",
+					"expressions": [{
+						"logic": 3,
+						"data": "0",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0003",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 1,
+						"data": "1",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0002",
+					"expressions": [{
+						"logic": 2,
+						"dataType": 1,
+						"dataLength": 3,
+						"data": "81",
+						"connectRelation": 1
+					}, {
+						"logic": 6,
+						"dataType": 1,
+						"dataLength": 3,
+						"data": "99",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "0X0001",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 1,
+						"data": "1",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "vehicleStatus",
+					"expressions": [{
+						"logic": 3,
+						"data": "1",
+						"connectRelation": 2
+					}],
+					"connectRelation": 1
+				}, {
+					"messageId": "gear",
+					"expressions": [{
+						"logic": 3,
+						"dataType": 1,
+						"dataLength": 11,
+						"data": "0",
+						"connectRelation": 1
+					}],
+					"connectRelation": 1
+				}]
+			}],
+			"totalTimeConsuming": 5,
+			"dependencies": [{
+				"ecuReqId": "0X16E2",
+				"ecuSwDid": "0XD001",
+				"type": 1,
+				"ecuDids": [{
+					"did": "0xF188",
+					"didValue": "V1.1.3",
+					"start": 0,
+					"end": 13
+				}]
+			}, {
+				"ecuReqId": "0X16E2",
+				"ecuSwDid": "0XD001",
+				"type": 2,
+				"ecuDids": [{
+					"did": "0xF188",
+					"didValue": "V2.0.1",
+					"start": 0,
+					"end": 13
+				}]
+			}],
+			"ecuGroupOrders": [{
+				"groupFlag": 1,
+				"actionForFailed": 1,
+				"groupEcus": [{
+					"ecuReqId": "0X16E2",
+					"ecuSwDid": "0XD001",
+					"upgradeOrder": 1,
+					"ecuTimeConsuming": 600,
+					"ecuTimeout": 750
+				}]
+			}]
+		}
+	}
+}

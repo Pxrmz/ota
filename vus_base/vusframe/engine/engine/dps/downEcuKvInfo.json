@@ -1,0 +1,67 @@
+{
+    "packageFormat": 1,
+    "downEcuInfos": [
+        {
+            "ecuReqId": "0X16E2",
+            "ecuSwDid": "0XD001",
+            "srcPkg": {
+                "pkgType": 2,
+                "srcVer": "V1.0",
+                "dstVer": "V2.0",
+                "pkgFile": {
+                    "fileName": "ecuV1.0.zip",
+                    "url": "http://otadown-dev.evergrandeauto.com/download/pkg/yf000000000000012/hengdaTboxPackage.zip",
+                    "hash": "d1f97c0939b05e2734606e5f4a6561892412229c76fb0840e9d639defe34c63e",
+                    "size": 167950984
+                }
+            },
+            "dstPkg": {
+                "pkgType": 2,
+                "srcVer": "V1.0",
+                "dstVer": "V2.0",
+                "pkgFile": {
+                    "fileName": "ecuV2.0.zip",
+                    "url": "http://otadown-dev.evergrandeauto.com/download/pkg/yf000000000000012/hengdaTboxPackage.zip",
+                    "hash": "d1f97c0939b05e2734606e5f4a6561892412229c76fb0840e9d639defe34c63e",
+                    "size": 167950984
+                }
+            }
+        },
+        {
+            "ecuReqId": "0X16E3",
+            "ecuSwDid": "0XD002",
+            "dstPkg": {
+                "pkgType": 1,
+                "dstVer": "V3.0",
+                "pkgFile": {
+                    "fileName": "ecuV3.0.zip",
+                    "url": "http://otadown-dev.evergrandeauto.com/download/pkg/yf000000000000012/hengdaTboxPackage.zip",
+                    "hash": "d1f97c0939b05e2734606e5f4a6561892412229c76fb0840e9d639defe34c63e",
+                    "size": 167950984
+                }
+            }
+        }
+    ],
+    "downPkgInfos": [
+        {
+            "pkgFile": {
+                "fileName": "e0c692f70f444a52b0213f53ebc4efa5.zip",
+                "url": "http://otadown-dev.evergrandeauto.com/download/package/bigstrategy/1014/e0c692f70f444a52b0213f53ebc4efa5.zip",
+                "hash": "c292b8ffdacebaa95cb8925f30a670f0c367892a622ee982dd40439c469c3896",
+                "size": 105706192,
+                "fileSecurityInfo": {
+                    "pkgKey": "f411c07be2dc46fbbd1d42c14cc66f91"
+                }
+            },
+            "ecuInfos": [
+                {
+                    "ecuPartNum": "0X01",
+                    "ecuReqId": "0X16E2",
+                    "ecuSwDid": "0XD001",
+                    "srcPkgName": "filedownf0a5b14020b6450090ec0ad40ca5576c.zip",
+                    "dstPkgName": "filedowncb5a6393f9dc4ffd864b53f703d8589e.zip"
+                }
+            ]
+        }
+    ]
+}

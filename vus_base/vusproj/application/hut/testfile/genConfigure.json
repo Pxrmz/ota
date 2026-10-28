@@ -1,0 +1,40 @@
+{
+    "generalConfVersion": "configV1.0",
+    "cyclePeriod": 25,
+    "maxFireTrigger": 3,
+
+    "logPrintLevel": 1,
+    "logReportCycle": 1,
+    "eventReportLevel": 3,
+    "eventReportCycle": 1,
+    "resultReportCycle": 1,
+
+    "saLibList": [
+        {
+            "saLibNumber": 1,
+            "saLibUrl": "qqq",
+            "saLibHash": "qqqqqq",
+            "saLibSize": 1334
+        }
+    ],
+    "resourceDidList": [
+        {
+            "resourceName": "hardVer",
+            "resourceDid": "0XF191",
+            "resourceValType": 2
+        }
+    ],
+    "flashScriptList": [
+        {
+            "flashScriptNumber": 1,
+            "flashScriptUrl": "xxx",
+            "flashScriptHash": "xxxxxx",
+            "flashScriptSize": 1024
+        }
+    ],
+    "businessScript": {
+        "businessScriptUrl": "yyy",
+        "businessScriptHash": "yyyyyy",
+        "businessScriptSize": 120
+    }
+}

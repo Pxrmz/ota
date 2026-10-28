@@ -1,0 +1,42 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    Gainsboro true
+    SequenceMessageAlign center
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+
+}
+
+start
+floating note left: 应用层打包文件创建zip包时调用
+:传入上报文件包的路径;
+:KV保存文件包路径;
+stop
+
+start
+floating note left: 主动上报文件时调用
+repeat
+
+repeat
+:上报文件到云端;
+:解析云端返回消息，上报是否成功;
+repeat while (上报是否成功 && 是否到达重试次数?)
+
+repeat while (遍历KV文件包信息路径)
+
+if ((文件包上报已经成功) || 文件包多次上报失败满足删除条件) then (yes)
+:KV删除文件包路径信息;
+endif
+stop
+
+@enduml
+

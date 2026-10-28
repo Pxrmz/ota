@@ -1,0 +1,1 @@
+{"type":7,"conditions":[{"serviceType":"0X2002","messageId":"0x31C","messageName":"车辆电源状态","expressions":[{"logic":3,"dataType":2,"dataLength":4,"data":"2","connectRelation":2},{"logic":3,"dataType":2,"dataLength":4,"data":"0","connectRelation":2}],"connectRelation":1}]}

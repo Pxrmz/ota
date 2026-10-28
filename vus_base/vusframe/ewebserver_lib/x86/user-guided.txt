@@ -1,0 +1,11 @@
+1、config.txt配置eweb参数的--服务器的根目录、HTTP(s)端口、安全证书路径等等 详见civetweb的配置文件
+2、server.pem是用于https的安全证书示例--需要用户配置服务端和客户端的TLS证书
+3、ewebsrvdemo是示例程序--运行时当前目录下需要放置config.txt server.pem 以及创建upload目录
+4、ab_ewebsrv_api.h 、libewebsrvapi.so libewebsrvapi-static.a依赖SSL库 --库和头文件
+5、curl测试:
+        下载：curl -k -get -o test https://172.16.30.179:8082/upload/123.zip   --服务器根目录下有/upload/123.zip 文件
+
+        上传：curl -v -F 'filename=config.json' -F 'file=@/home/mengw/myshare/code/evg/vus/build/config.json'  http://172.16.30.179:8082/upload/
+            -F 'filename=config.json' 上传到服务器的存储文件名
+            -F 'file=@/home/mengw/myshare/code/evg/vus/build/config.json' 本地待上传的文件绝对路径
+            /upload/   服务器的相对根目录的存储路径

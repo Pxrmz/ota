@@ -1,0 +1,608 @@
+{
+	"downConditions": [
+		{
+			"type": 1,
+			"conditions": [
+				{
+					"messageId": "powerStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 20,
+							"data": "shouqian",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "carSpeed",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0002",
+					"expressions": [
+						{
+							"logic": 2,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "81",
+							"connectRelation": 1
+						},
+						{
+							"logic": 6,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "99",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0001",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "vehicleStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "gear",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 11,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 2,
+			"conditions": [
+				{
+					"messageId": "powerStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 20,
+							"data": "shouqian",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "carSpeed",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0002",
+					"expressions": [
+						{
+							"logic": 2,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "81",
+							"connectRelation": 1
+						},
+						{
+							"logic": 6,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "99",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0001",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "vehicleStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "gear",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 11,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 5,
+			"conditions": [
+				{
+					"messageId": "powerStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 20,
+							"data": "shouqian",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "carSpeed",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0002",
+					"expressions": [
+						{
+							"logic": 2,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "81",
+							"connectRelation": 1
+						},
+						{
+							"logic": 6,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "99",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0001",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "vehicleStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "gear",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 11,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		}
+	],
+	"transferConditions": [
+		{
+			"type": 1,
+			"conditions": [
+				{
+					"messageId": "powerStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 20,
+							"data": "shouqian",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "carSpeed",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0002",
+					"expressions": [
+						{
+							"logic": 2,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "81",
+							"connectRelation": 1
+						},
+						{
+							"logic": 6,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "99",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0001",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "vehicleStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "gear",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 11,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 2,
+			"conditions": [
+				{
+					"messageId": "powerStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "biaoqian",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 20,
+							"data": "shouqian",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "carSpeed",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0002",
+					"expressions": [
+						{
+							"logic": 2,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "81",
+							"connectRelation": 1
+						},
+						{
+							"logic": 6,
+							"dataType": 1,
+							"dataLength": 3,
+							"data": "99",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "0X0001",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 1,
+							"data": "1",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "vehicleStatus",
+					"expressions": [
+						{
+							"logic": 3,
+							"data": "1",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"messageId": "gear",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 1,
+							"dataLength": 11,
+							"data": "0",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		}
+	],
+	"downEcuInfos": [
+		{
+			"ecuReqId": "0X16E2",
+			"ecuSwDid": "0XD001",
+			"srcPkg": {
+				"pkgType": 2,
+				"srcVer": "V1.0",
+				"dstVer": "V2.0",
+				"pkgFile": {
+					"fileName": "ecuV1.0.zip",
+					"url": "http://1.116.125.96/test/1316b65fbad242a0b24c7634432223a9.zip",
+					"hash": "3b2a8aa30cb7eb13c9cc8eb748423f9061ba315819922f821d7a97faa1743b63",
+					"size": 16988381
+				}
+			},
+			"dstPkg": {
+				"pkgType": 2,
+				"srcVer": "V1.0",
+				"dstVer": "V2.0",
+				"pkgFile": {
+					"fileName": "ecuV2.0.zip",
+					"url": "http://1.116.125.96/test/1316b65fbad242a0b24c7634432223a9.zip",
+					"hash": "3b2a8aa30cb7eb13c9cc8eb748423f9061ba315819922f821d7a97faa1743b63",
+					"size": 16988381
+				}
+			}
+		},
+		{
+			"ecuReqId": "0X16E3",
+			"ecuSwDid": "0XD002",
+			"dstPkg": {
+				"pkgType": 1,
+				"dstVer": "V3.0",
+				"pkgFile": {
+					"fileName": "ecuV3.0.zip",
+					"url": "http://1.116.125.96/test/1316b65fbad242a0b24c7634432223a9.zip",
+					"hash": "3b2a8aa30cb7eb13c9cc8eb748423f9061ba315819922f821d7a97faa1743b63",
+					"size": 16988381
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,623 @@
+{
+	"downConditions": [
+		{
+			"type": 1,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 2,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 3,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 4,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 5,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		}
+	],
+	"transferConditions": [
+		{
+			"type": 1,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 2,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 3,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 4,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		},
+		{
+			"type": 5,
+			"conditions": [
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0001",
+					"messageName": "",
+					"messageDesc": "",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 2,
+							"dataLength": 4,
+							"data": "64",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0x0002",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 3,
+							"data": "128",
+							"connectRelation": 1
+						}
+					],
+					"connectRelation": 1
+				},
+				{
+					"serviceType": "0X1001",
+					"messageId": "0X0003",
+					"expressions": [
+						{
+							"logic": 3,
+							"dataType": 6,
+							"dataLength": 5,
+							"data": "hello",
+							"connectRelation": 2
+						}
+					],
+					"connectRelation": 1
+				}
+			]
+		}
+	],
+	"downPkgInfos": [
+		{
+			"pkgFile": {
+				"fileName": "1316b65fbad242a0b24c7634432223a9.zip",
+				"url": "http://1.116.125.96/test/1316b65fbad242a0b24c7634432223a9.zip",
+				"hash": "3b2a8aa30cb7eb13c9cc8eb748423f9061ba315819922f821d7a97faa1743b63",
+				"size": 16988381,
+				"fileSecurityInfo": {
+					"isEncrypt": 0,
+					"oriHash": "a53e40a08ae3d8038874f865a4162adf50a725e3b40da6264d2bb8a3e27ff4f8",
+					"oriSize": 16988381,
+					"pkgKey": "4a17477eeda8440181fb63ceb02c1d99",
+					"segmentDecryptLen": 0,
+					"fileMetas": [
+						{
+							"size": 16988381,
+							"checkSum": {
+								"algorithm": 3,
+								"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+							},
+							"type": 1
+						},
+						{
+							"size": 65,
+							"checkSum": {
+								"algorithm": 3,
+								"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+							},
+							"type": 2
+						}
+					]
+				}
+			},
+			"ecuInfos": [
+				{
+					"ecuPartNum": "0X01",
+					"ecuReqId": "0X16E2",
+					"ecuSwDid": "0XD001",
+					"dstPkgFile": {
+						"fileName": "d15286bf6e2a44b8a80cd3ba198a4946.zip",
+						"hash": "8c4ee0090009694da2b7cc182f3392c8a21ed20b2bc05d6b7c25bb2ed9e30a2c",
+						"size": 8493778,
+						"fileSecurityInfo": {
+							"isEncrypt": 0,
+							"oriHash": "8c4ee0090009694da2b7cc182f3392c8a21ed20b2bc05d6b7c25bb2ed9e30a2c",
+							"oriSize": 8493778,
+							"pkgKey": "4a17477eeda8440181fb63ceb02c1d99",
+							"segmentDecryptLen": 0,
+							"fileMetas": [
+								{
+									"size": 8493778,
+									"checkSum": {
+										"algorithm": 3,
+										"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+									},
+									"type": 1
+								},
+								{
+									"size": 65,
+									"checkSum": {
+										"algorithm": 3,
+										"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+									},
+									"type": 2
+								}
+							]
+						}
+					}
+				},
+				{
+					"ecuPartNum": "0X02",
+					"ecuReqId": "0X16E3",
+					"ecuSwDid": "0XD001",
+					"dstPkgFile": {
+						"fileName": "d15286bf6e2a44b8a80cd3ba198a494a.zip",
+						"hash": "8c4ee0090009694da2b7cc182f3392c8a21ed20b2bc05d6b7c25bb2ed9e30a2c",
+						"size": 8493778,
+						"fileSecurityInfo": {
+							"isEncrypt": 0,
+							"oriHash": "8c4ee0090009694da2b7cc182f3392c8a21ed20b2bc05d6b7c25bb2ed9e30a2c",
+							"oriSize": 8493778,
+							"pkgKey": "4a17477eeda8440181fb63ceb02c1d99",
+							"segmentDecryptLen": 0,
+							"fileMetas": [
+								{
+									"size": 1262920,
+									"checkSum": {
+										"algorithm": 3,
+										"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+									},
+									"type": 1
+								},
+								{
+									"size": 65,
+									"checkSum": {
+										"algorithm": 3,
+										"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+									},
+									"type": 2
+								}
+							]
+						}
+					},
+					"srcPkgFile": {
+						"fileName": "d15286bf6e2a44b8a80cd3ba198a4946.zip",
+						"hash": "8c4ee0090009694da2b7cc182f3392c8a21ed20b2bc05d6b7c25bb2ed9e30a2c",
+						"size": 8493778,
+						"fileSecurityInfo": {
+							"isEncrypt": 0,
+							"oriHash": "8c4ee0090009694da2b7cc182f3392c8a21ed20b2bc05d6b7c25bb2ed9e30a2c",
+							"oriSize": 8493778,
+							"pkgKey": "4a17477eeda8440181fb63ceb02c1d99",
+							"segmentDecryptLen": 0,
+							"fileMetas": [
+								{
+									"size": 1262920,
+									"checkSum": {
+										"algorithm": 3,
+										"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+									},
+									"type": 1
+								},
+								{
+									"size": 65,
+									"checkSum": {
+										"algorithm": 3,
+										"value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+									},
+									"type": 2
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

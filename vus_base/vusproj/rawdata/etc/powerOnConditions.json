@@ -1,0 +1,87 @@
+{
+    "type": 7,
+    "conditions": [
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x305",
+            "messageName": "动力电池电量值百分比",
+            "expressions": [
+                {
+                    "logic": 1,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "15",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x309",
+            "messageName": "车辆充电状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "1",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x310",
+            "messageName": "车辆放电状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "0",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x31C",
+            "messageName": "车辆电源状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "2",
+                    "connectRelation": 2
+                },
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "0",
+                    "connectRelation": 2
+                }
+            ],
+            "connectRelation": 1
+        },
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x343",
+            "messageName": "驻车保电状态",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "0",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        }
+    ]
+}

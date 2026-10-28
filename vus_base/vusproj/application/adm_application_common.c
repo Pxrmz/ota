@@ -1,0 +1,1 @@
+#include "adm_application_common.h"

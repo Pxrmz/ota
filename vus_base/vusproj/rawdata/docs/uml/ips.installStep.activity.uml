@@ -1,0 +1,63 @@
+@startuml
+
+start
+note
+升级准备
+end note
+if(状态是POST_DOWNLOAD?) then(是)
+    :清空安装策略信息;
+    :清空任务信息;
+    :清空配置信息;
+    :清空进度信息;
+    :清空升级（含回滚）顺序信息;
+    if(创建安装策略信息) then(成功)
+        if(创建任务信息) then(成功)
+            if(创建配置信息) then(成功)
+                if(创建进度信息) then(成功)
+                    if(创建升级（含回滚）顺序信息) then(成功)
+                        :状态设定为PRE_INSTALL;
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+
+stop
+
+start
+note
+升级进入
+end note
+if(状态是PRE_INSTALL?) then(是)
+    :状态设定为INSTALLING;
+endif
+
+stop
+
+start
+note
+升级退出
+end note
+if(状态是INSTALLING?) then(是)
+    :状态设定为POST_INSTALL;
+endif
+
+stop
+
+start
+note
+升级结束
+end note
+if(状态是POST_INSTALL?) then(是)
+    :清空安装策略信息;
+    :清空任务信息;
+    :清空配置信息;
+    :清空进度信息;
+    :清空升级（含回滚）顺序信息;
+    :状态设定为IDLE;
+endif
+
+stop
+
+@enduml

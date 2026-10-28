@@ -1,0 +1,32 @@
+@startuml
+autoactivate on
+hide footbox
+title 安装状态迁移服务
+actor ipm
+ipm -> ips: adm_ips_installPrepareStart()
+ips -> vss: 校验状态POST_DOWNLOAD
+vss --> ips
+ips -> cvs: 获取安装策略
+cvs --> ips: 安装策略
+ips -> vss: 状态迁移PRE_INSTALL
+vss --> ips
+ips --> ipm
+ipm -> ips: adm_ips_installEntry()
+ips -> vss: 校验状态PRE_INSTALL
+vss --> ips
+ips -> vss: 状态迁移INSTALLING
+vss --> ips
+ips --> ipm
+ipm -> ips: adm_ips_installExit()
+ips -> vss: 校验状态INSTALLING
+vss --> ips
+ips -> vss: 状态迁移POST_INSTALL
+vss --> ips
+ips --> ipm
+ipm -> ips: adm_ips_installVehicleEnd()
+ips -> vss: 校验状态POST_INSTALL
+vss --> ips
+ips -> vss: 状态迁移IDLE
+vss --> ips
+ips --> ipm
+@enduml

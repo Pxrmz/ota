@@ -1,0 +1,74 @@
+cmake_minimum_required(VERSION 3.10)
+project(SDK CXX C)
+set(project_name "sdk")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
+    -fPIC\
+    ")
+    
+add_library(${project_name}
+    src/adm_sdk_version.c
+    src/adm_sdk_selfUpgrade.c
+)
+
+target_include_directories(
+    ${project_name}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/application/sdk/inc
+    ${CMAKE_SOURCE_DIR}/engine
+    ${CMAKE_SOURCE_DIR}/engine/config/inc
+    ${CMAKE_SOURCE_DIR}/engine/common/config/inc
+    ${CMAKE_SOURCE_DIR}/engine/common/errorCode/inc
+    ${CMAKE_SOURCE_DIR}/engine/common/lib/inc
+    ${CMAKE_SOURCE_DIR}/engine/common/kvstorage/inc
+    ${CMAKE_SOURCE_DIR}/dim/inc/public
+    ${CMAKE_SOURCE_DIR}/application
+    ${CMAKE_SOURCE_DIR}/application/ecm/inc
+    ${CMAKE_SOURCE_DIR}/application/ocm/inc
+    ${CMAKE_SOURCE_DIR}/application/vrm/inc
+    ${CMAKE_SOURCE_DIR}/application/vsm/inc
+    ${CMAKE_SOURCE_DIR}/application/irm/inc/public
+    ${CMAKE_SOURCE_DIR}/engine/ecs/inc/public
+    ${CMAKE_SOURCE_DIR}/engine/ocs/inc/public
+    ${CMAKE_SOURCE_DIR}/engine/vrs/inc/public
+    ${CMAKE_SOURCE_DIR}/engine/vrs/inc/private
+
+    ${CMAKE_SOURCE_DIR}/foundation/tools/tracer/inc
+    ${CMAKE_SOURCE_DIR}/foundation/arpc/inc
+    ${CMAKE_SOURCE_DIR}/soa/inc/public
+
+    ${CMAKE_SOURCE_DIR}/oca/inc/
+    ${CMAKE_SOURCE_DIR}/dim/inc/public
+    ${CMAKE_SOURCE_DIR}/uim/inc/public
+    ${CMAKE_SOURCE_DIR}/foundation/packages
+    ${CMAKE_SOURCE_DIR}/foundation/packagescrypt
+    ${CMAKE_SOURCE_DIR}/foundation/packages/openssl
+    ${CMAKE_SOURCE_DIR}/foundation/packages/curl
+    ${CMAKE_SOURCE_DIR}/foundation/packages/json-c
+
+    ${CMAKE_SOURCE_DIR}/foundation/packages/log
+    ${CMAKE_SOURCE_DIR}/foundation/packages/lib
+    ${CMAKE_SOURCE_DIR}/foundation/packages/lib/hmac
+
+    ${CMAKE_SOURCE_DIR}/foundation/platform/libs/inc/kvstorage
+    ${CMAKE_SOURCE_DIR}/foundation/platform/libs/inc
+    ${CMAKE_SOURCE_DIR}/foundation/platform/os
+    # compilation clipping
+    ${CUSTOM_SUPPORT_HEADERS}
+)
+
+target_link_libraries(
+    ${project_name}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/build/dim/libdim.a
+    ${CMAKE_SOURCE_DIR}/build/uim/libuim.a
+    ${CMAKE_SOURCE_DIR}/build/soa/libsoa.a
+    ${CMAKE_SOURCE_DIR}/foundation/arpc/lib/libarpc.so
+    ${CMAKE_SOURCE_DIR}/build/engine/libcore_service.so
+    ${FOUNDATION_LIB_PATH}/libfoundation.so
+    ${DTS_TOOL_LIB}
+    ${SYSTEM_LIBRARY}
+)
+
+
+# add_subdirectory(sample)

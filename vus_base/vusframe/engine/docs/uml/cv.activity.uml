@@ -1,0 +1,61 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    sequenceMessageAlign center
+    Gainsboro true
+    hide footbox
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+}
+
+title  **检测版本流程图** 
+
+start
+if (输入输出参数是否有效?) then (yes)
+  if(向ECM获取车辆配置信息，是否成功?) then(yes)
+    while(遍历配置中的零件，读零件信息)
+      :调用DIM读零件信息;
+    endwhile
+    :整理所有零件信息;
+    :获取车云交互字段信息(timestamp netType \nversionNumber sdkVersion confVersion);
+    
+    :调用CVS车云交互;
+    :调用OTA_Client接口序列化请求报文;
+    if(签名加密请求报文，是否成功?) then (yes)
+      if(调用OCA接口向云端检测，是否成功?) then (yes)
+        if(解密验签响应报文，是否成功?) then (yes)
+        :调用OTA_Client接口反序列化响应报文;
+        :返回CVS车云交互结果;
+        if(响应报文，有新版本) then (有新版)
+          :数据库保存新版本策略;
+          :下载HMI显示策略文件;
+        elseif (响应报文，无新版本) then (无新版本)
+          :返回无新版本;
+        else (错误)
+          :返回错误码;
+        endif
+        :返回CVM检测结果;
+        else (no)
+        endif
+      else (no)
+      endif
+    else (no)
+    endif 
+  else (no)
+  endif
+else (no)
+endif
+:返回具体的错误码;
+stop
+
+@enduml
+
+

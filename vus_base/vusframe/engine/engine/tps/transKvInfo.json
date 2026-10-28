@@ -1,0 +1,40 @@
+{
+    "transTaskInfo": {
+        "sessionId": "e0c692f70f444a52b0213f53ebc4efa5.zip",
+        "taskId": 100,
+        "strategyId": 101
+    },
+    "transEcuInfo": [
+        {
+            "ecuReqId": "0X16E2",
+            "ecuSwDid": "0XD001",
+            "downInstId": "0X0001",
+            "transInstId": "0X2001",
+            "installInstId": "0X2001",
+            "srcPkg": {
+                "hash": "d1f97c0939b05e2734606e5f4a6561892412229c76fb0840e9d639defe34c63e",
+                "fileName": "b93b46ee77fd410899187e1c3a7f142e.iso",
+                "filePath": "/tmp/vus/unzip/downPkg/b93b46ee77fd410899187e1c3a7f142e.iso",
+                "fileSize": 167950984
+            },
+            "dstPkg": {
+                "hash": "d1f97c0939b05e2734606e5f4a6561892412229c76fb0840e9d639defe34c63e",
+                "fileName": "123.iso",
+                "filePath": "/tmp/vus/unzip/downPkg/123.iso",
+                "fileSize": 123456
+            }
+        }
+    ],
+    "transRst_pkgName": {
+        "result": 0,
+        "failReason": "ok",
+        "transState": 10
+    },
+    "transProg_pkgName": {
+        "speed": 60,
+        "totalTime": 120,
+        "remainTime": 100,
+        "saveBytes": 10570,
+        "totalBytes": 105706192
+    }
+}

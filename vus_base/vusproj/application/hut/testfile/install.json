@@ -1,0 +1,111 @@
+{
+  "upgradeAutoStart": "xxx",
+  "upgradeRetryCount": 1,
+  "rollbackRetryCount": 1,
+  "upgradeConditions": [
+    {
+      "type": 1,
+      "conditions": [
+        {
+          "messageId": "xxx",
+          "messageName": "xxx",
+          "messageDesc": "xxx",
+          "expression": {
+            "logic": 1,
+            "dataType": 1,
+            "dataLength": 3,
+            "data": "xxx",
+            "connectRelation": 1
+          },
+          "onFailStrategy": {
+            "type": 1,
+            "timeout": 30,
+            "action": 1,
+            "expression": {
+              "logic": 1,
+              "dataType": 1,
+              "dataLength": 3,
+              "data": "xxx",
+              "connectRelation": 1
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "totalTimeConsuming": 8,
+  "dependencies": [
+    {
+      "type": 1,
+      "ecuReqId": "0X700",
+      "ecuSwDid": "0XF187",
+      "ecuDids": [
+        {
+          "did": "0XF187",
+          "didValue": "V1.0"
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "ecuReqId": "0X700",
+      "ecuSwDid": "0XF187",
+      "ecuDids": [
+        {
+          "did": "0XF187",
+          "didValue": "V2.0"
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "ecuReqId": "0X7B4",
+      "ecuSwDid": "0XF187",
+      "ecuDids": [
+        {
+          "did": "0XF187",
+          "didValue": "V1.0"
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "ecuReqId": "0X7B4",
+      "ecuSwDid": "0XF187",
+      "ecuDids": [
+        {
+          "did": "0XF187",
+          "didValue": "V2.0"
+        }
+      ]
+    }
+  ],
+  "ecuGroupOrders": [
+    {
+      "groupFlag": 1,
+      "actionForFailed": 1,
+      "groupEcus": [
+        {
+          "ecuReqId": "0X700",
+          "ecuSwDid": "0XF187",
+          "upgradeOrder": 1,
+          "ecuTimeConsuming": 2,
+          "ecuTimeout": 4
+        }
+      ]
+    },
+    {
+      "groupFlag": 2,
+      "actionForFailed": 2,
+      "groupEcus": [
+        {
+          "ecuReqId": "0X7B4",
+          "ecuSwDid": "0XF187",
+          "upgradeOrder": 2,
+          "ecuTimeConsuming": 6,
+          "ecuTimeout": 12
+        }
+      ]
+    }
+  ]
+}

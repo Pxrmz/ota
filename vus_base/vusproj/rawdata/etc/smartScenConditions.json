@@ -1,0 +1,20 @@
+{
+    "type": 1,
+    "conditions": [
+        {
+            "serviceType": "0X2002",
+            "messageId": "0x30D",
+            "messageName": "童锁模式",
+            "expressions": [
+                {
+                    "logic": 3,
+                    "dataType": 2,
+                    "dataLength": 4,
+                    "data": "0",
+                    "connectRelation": 1
+                }
+            ],
+            "connectRelation": 1
+        }
+    ]
+}

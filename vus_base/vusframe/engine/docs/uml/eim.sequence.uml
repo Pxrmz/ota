@@ -1,0 +1,109 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    sequenceMessageAlign center
+    Gainsboro true
+    hide footbox
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+}
+
+title  **获取ecuInfo时序图** 
+hide footbox
+
+participant ECM
+participant EIM
+participant DIM
+participant KV
+
+alt 从数据库中获取ecuInfo
+EIM->KV:读数据库获取ecuInfo
+activate EIM
+activate KV
+EIM<--KV:返回ecuInfo
+deactivate KV
+EIM->EIM:返回序列化的字符串或者结构体数据
+deactivate EIM
+
+else 从DIM中实时获取ecuInfo
+EIM->ECM:获取零件配置
+activate EIM
+activate ECM
+EIM<--ECM:返回零件配置
+deactivate ECM
+EIM->EIM:序列化配置
+EIM->DIM:获取所有ecuInfo
+activate DIM
+EIM<--DIM:返回ecuInfo
+deactivate DIM
+EIM->EIM:序列化返回ecuInfo
+EIM->KV:保存ecuInfo到KV；覆盖老的ecuInfo
+activate KV
+EIM<--KV:返回结果
+deactivate KV
+EIM->EIM:返回序列化的字符串或者结构体数据
+deactivate EIM
+
+else 周期获取ecuInfo
+EIM->ECM:获取零件配置
+activate EIM
+activate ECM
+EIM<--ECM:返回零件配置
+deactivate ECM
+
+EIM->KV:查询已经获取过的ecuInfo
+activate KV
+EIM<--KV:返回查询结果
+deactivate KV
+
+EIM->EIM:通过零件配置与本地已经获取过的ecu对比；\n找出未获取的ecu
+
+note left of EIM:找出未采集的ecu
+
+loop 采集未获取的ecuInfo:循环从DIM获取单个ecuInfo
+EIM->DIM:获取单个ecuInfo
+activate DIM
+EIM<--DIM:返回单个ecuInfo
+deactivate DIM
+EIM->EIM:序列化单个ecuInfo
+
+EIM->KV:保存单个ecuInfo到KV
+activate KV
+EIM<--KV:返回结果
+note left of EIM:为了保证断电重启后，\n已经采集过的ecuInfo不再采集
+deactivate KV
+end
+
+loop 读出所有的ecuInfo:循环从KV中获取单个ecuInfo
+EIM->KV:获取单个ecuInfo
+activate KV
+EIM<--KV:返回结果
+deactivate KV
+end
+
+EIM->EIM:合并所有单个ecuInfo为总的ecuInfo
+EIM->KV:保存总的ecuInfo到KV
+activate KV
+EIM<--KV:返回结果
+deactivate KV
+
+loop 删除所有的单个ecuInfo:循环从KV中删除单个ecuInfo
+EIM->KV:删除单个ecuInfo
+activate KV
+EIM<--KV:返回结果
+deactivate KV
+end
+note left of EIM:此时KV中只剩下总的ecuInfo，\n所有单个ecuInfo被清除
+EIM->EIM:等待下次周期获取ecuInfo
+
+end
+@enduml
+

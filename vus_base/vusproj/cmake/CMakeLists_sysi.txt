@@ -1,0 +1,403 @@
+cmake_minimum_required(VERSION 3.10)
+project(SYSI C CXX)
+
+#是否将admsysi4deployapp划分为ucl+vdi
+SET(SPLIT_SYSI ON)
+#SET(ADM_SDK_VERSION "V2.0.0")
+
+
+#是否需要携带dtstool 在toolchain中配置
+if(DTS_TOOL_SWITCH)
+    ADD_DEFINITIONS(-D__MACRO_DTS_TOOL_SWITCH__)
+    set(DTS_TOOL_LIB 
+        ${CMAKE_SOURCE_DIR}/foundation/tools/tracer/lib/libdtsnode.a)
+else()
+    set(DTS_TOOL_LIB "")
+endif()
+
+#选择是否使用模拟接口或者对接OEM接口
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "x86")
+	option(USE_SIMULATE_DATA    "Use simulate data"     ON)
+else()
+	option(USE_SIMULATE_DATA    "Use simulate data"     OFF)
+endif()
+
+if(USE_SIMULATE_DATA)
+    ADD_DEFINITIONS(-DUSE_SIMULATE_DATA)
+endif()
+
+option(SUPPORT_LION_PKI_SYSI    "Support lion pki"     ON)
+if (SUPPORT_LION_PKI_SYSI)
+    ADD_DEFINITIONS(-D SUPPORT_LION_PKI_SYSI)
+endif()
+
+#支持并行获取零件信息
+set(PARALLEL_GET_ECU_SUPPORT ON)
+if (PARALLEL_GET_ECU_SUPPORT)
+    ADD_DEFINITIONS(-D ADM_PARALLEL_GET_ECU)
+endif()
+
+###########################################################SDK VERSION########################################################################
+
+# SET(MAJOR_VERSION 1)
+# SET(MINOR_VERSION 1)
+# SET(HOTFIX_VERSION 1)
+SET(PROJECT_NAME "admsysi")
+message("SDK_VERSION = ${SDK_VERSION}")
+SET(ADM_SDK_VERSION ${SDK_VERSION})
+
+EXECUTE_PROCESS(COMMAND date +%Y%m%d OUTPUT_VARIABLE COMPILE_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
+EXECUTE_PROCESS(COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE GIT_COMMITID OUTPUT_STRIP_TRAILING_WHITESPACE WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/sysi)
+
+SET(PROJECT_VERSION ${PROJECT_NAME}_${ENV_PLATFORM}_${ADM_SDK_VERSION}_${COMPILE_DATE}_${GIT_COMMITID})
+ADD_DEFINITIONS(-DADM_SDK_VERSION="${PROJECT_VERSION}")
+MESSAGE("+++++++++++PROJECT_VERSION = ${PROJECT_VERSION}")
+###########################################################SDK VERSION########################################################################
+
+# for pc x86 features macro definition
+if(CUSTOM_CMAKE_SYSTEM_NAME)
+    message("CMakeLists_sysi.txt CUSTOM_CMAKE_SYSTEM_NAME=${CUSTOM_CMAKE_SYSTEM_NAME}")
+else()
+    set(CUSTOM_CMAKE_SYSTEM_NAME Linux)
+    # tracer over dlt or myself definition on mqtt+lwm2m
+    # TRACE_DLT: 
+    # TRACE_MQ: 
+    # TRACE_NONE 
+    set(CUSTOM_CMAKE_TRACE_TYPE TRACE_DLT)
+
+    # yet not support android ndk for 64bit
+    set(CUSTOM_CMAKE_TRACE_API ON)
+
+    #
+    set(USE_SYSTEM_SSL OFF)
+    set(USE_MYSELF_SSL_SHARED_LIB OFF)
+
+    # base library(foundation and vrpc) type: ON: static; OFF: shared
+    set(CUSTOM_IMPORT_BASE_FULL_STATIC_LIB OFF)
+
+    # # bin/etc/lib root path; MUST ben end with '/'
+    # set(CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR "/tmp/admfota/admvus/")
+    # # Runtime path; MUST ben end with '/'
+    # set(CUSTOM_ADM_COM_ROOT_DIR "/tmp/admfota/admvus/tmp/")
+
+    #ON: Module enable; OFF: disable
+    #set(CUSTOM_HOST_SERVICE_SUPPORT ON)
+    #set(CUSTOM_TRANS_SERVICE_SUPPORT ON)
+    #set(CUSTOM_UCL_SERVICE_SUPPORT ON)
+    #set(CUSTOM_VDI_SERVICE_SUPPORT OFF)
+    #set(CUSTOM_HMI_CLIENT_SUPPORT ON)
+    #set(CUSTOM_DPO_SERVICE_SUPPORT ON)
+
+endif()
+
+# -Wno-write-strings 忽略c++字符串相关转换过程的编译警告
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -std=gnu11 -Wl,-Map,${CMAKE_BINARY_DIR}/output.map")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -Wno-write-strings -Wl,-Map,${CMAKE_BINARY_DIR}/output.map")
+
+add_definitions(-fPIC)
+
+ADD_DEFINITIONS(-DHTTP_ENCRYPTED_TRANS="39cabdfaab8c4da09bd6e9823c527836")
+ADD_DEFINITIONS(-DHTTP_RESPOND_SIGN_KEY="39cabdfaab8c4da09bd6e9823c527836")
+
+option(USE_PUBLIC_V50_PLATFORM    "Use the public version 5.0 platform"     ON)
+
+if (LOG)
+    set(LOG_LEVEL 0)
+    message(STATUS "LOG:${LOG}" ";LOG_LEVEL:${LOG_LEVEL}")
+else ()
+    set(LOG_LEVEL 1)
+    message(STATUS "LOG:${LOG}" ";LOG_LEVEL:${LOG_LEVEL}")
+endif ()
+
+set(FOUNDATION_LIB_PATH ${CMAKE_SOURCE_DIR}/foundation/packages/libs)
+
+message("-- Foundation lib path ++++++++++" ${FOUNDATION_LIB_PATH})
+
+set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/build/deploy)
+set(CMAKE_INSTALL_BINDIR ${CMAKE_INSTALL_PREFIX}/bin)
+set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
+set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include)
+set(CMAKE_BUILD_TYPE Debug)
+
+set(EXTERNAL_LIB_BINARY_DIR ${CMAKE_BINARY_DIR}/externalLib/lib)
+file(MAKE_DIRECTORY ${EXTERNAL_LIB_BINARY_DIR})
+
+# bin/lib/etc path
+if(NOT CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR) 
+    set(CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR "/data/admvus/") 
+endif() 
+add_definitions(-DCUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR="${CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR}") 
+# runtime path
+if(NOT CUSTOM_ADM_COM_ROOT_DIR) 
+    set(CUSTOM_ADM_COM_ROOT_DIR "/data/admnv/") 
+endif() 
+add_definitions(-DCUSTOM_ADM_COM_ROOT_DIR="${CUSTOM_ADM_COM_ROOT_DIR}") 
+message("+++++++++++CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR = ${CUSTOM_ADM_COM_OTA_PROGRAM_ROOT_DIR}")
+message("+++++++++++CUSTOM_ADM_COM_ROOT_DIR = ${CUSTOM_ADM_COM_ROOT_DIR}")
+
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(SYSTEM_LIBRARY pthread rt dl stdc++)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Android")
+    set(SYSTEM_LIBRARY c stdc++ m)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Alios")
+    set(SYSTEM_LIBRARY c)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "^QNX7$")
+    set(SYSTEM_LIBRARY c c++ m socket slog2)
+    set(CMAKE_CXX_STANDARD 11)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "^QNX7-1$")
+    ADD_DEFINITIONS(-D__CUSTOM_UCL_ADCC__)
+    set(SYSTEM_LIBRARY c c++ regex m socket slog2)
+    set(CMAKE_CXX_STANDARD 11)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "ag35")
+    ADD_DEFINITIONS(-D__CUSTOM_UCL_TBOX__)
+    set(SYSTEM_LIBRARY pthread rt dl stdc++)
+elseif(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "arma7")
+    ADD_DEFINITIONS(-D__CUSTOM_UCL_TBOX__)
+    set(SYSTEM_LIBRARY pthread rt dl stdc++)
+else()
+    set(SYSTEM_LIBRARY pthread rt stdc++)
+endif()
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Android")
+    set(CUSTOME_USE_DLSYM OFF)
+
+    # soa 序列化方式, protobuf, json 可选
+    set(CUSTOM_CMAKE_SERIAL_TYPE json)
+
+    set(CUSTOM_IMPORT_BASE_FULL_STATIC_LIB ON)
+else()
+    set(CUSTOME_USE_DLSYM ON)
+endif()
+
+message("+++++++++++use static lib CUSTOM_IMPORT_BASE_FULL_STATIC_LIB = ${CUSTOM_IMPORT_BASE_FULL_STATIC_LIB}")
+
+if(USE_SYSTEM_SSL)
+    message("+++++++++++use system ssl USE_SYSTEM_SSL = ${USE_SYSTEM_SSL}")
+    set(SSL_LIBRARY crypto ssl)
+else()
+    message("+++++++++++use project compile ssl USE_SYSTEM_SSL = ${USE_SYSTEM_SSL}")
+    
+    if(USE_DYNAMIC_SSL_LIB)
+        message("+++++++++++use project compile [shared] ssl USE_DYNAMIC_SSL_LIB = ${USE_DYNAMIC_SSL_LIB}")
+        set(SSL_LIBRARY ${FOUNDATION_LIB_PATH}/libcrypto.so  ${FOUNDATION_LIB_PATH}/libssl.so)
+    else()
+        message("+++++++++++use project compile [static] ssl USE_DYNAMIC_SSL_LIB = ${USE_DYNAMIC_SSL_LIB}")
+        set(SSL_LIBRARY ${FOUNDATION_LIB_PATH}/libcrypto-static.a ${FOUNDATION_LIB_PATH}/libssl-static.a)
+    endif()
+endif()
+
+message("+++++++++++CUSTOM_CMAKE_TRACE_TYPE = ${CUSTOM_CMAKE_TRACE_TYPE}")
+if(${CUSTOM_CMAKE_TRACE_TYPE} MATCHES "TRACE_DLT")
+    ADD_DEFINITIONS(-D__CUSTOM_TRACE_TYPE_DLT__)
+elseif($CUSTOM_CMAKE_TRACE_TYPE MATCHES "TRACE_MQ")
+    ADD_DEFINITIONS(-D__CUSTOM_TRACE_TYPE_MQ__)
+endif()
+
+message("-- CUSTOM_CMAKE_TRACE_TYPE: " ${CUSTOM_CMAKE_TRACE_TYPE})
+if(CUSTOM_CMAKE_TRACE_API)
+    message("+++++++++++use with CUSTOM_CMAKE_TRACE_API = ${CUSTOM_CMAKE_TRACE_API}")
+    ADD_DEFINITIONS(-DCUSTOM_CMAKE_TRACE_API=1)
+    set(XML_LIBRARY ${FOUNDATION_LIB_PATH}/libmxml.a)
+    # set(API_TEST_LIBRARY ${CMAKE_SOURCE_DIR}/build/tools/tracer/APITest/libapitest.so)
+    set(API_TEST_LIBRARY ${CMAKE_SOURCE_DIR}/build/tools/tracer/APITest/libapitest.a)
+else()
+    message("+++++++++++use without CUSTOM_CMAKE_TRACE_API = ${CUSTOM_CMAKE_TRACE_API}")
+    ADD_DEFINITIONS(-DCUSTOM_CMAKE_TRACE_API=0)
+    set(XML_LIBRARY "")
+    set(API_TEST_LIBRARY "")
+endif()
+
+# module enable/disable begin
+message("+++++++++++CUSTOM_HOST_SERVICE_SUPPORT = ${CUSTOM_HOST_SERVICE_SUPPORT}")
+message("+++++++++++CUSTOM_TRANS_SERVICE_SUPPORT = ${CUSTOM_TRANS_SERVICE_SUPPORT}")
+message("+++++++++++CUSTOM_UCL_SERVICE_SUPPORT = ${CUSTOM_UCL_SERVICE_SUPPORT}")
+message("+++++++++++CUSTOM_VDI_SERVICE_SUPPORT = ${CUSTOM_VDI_SERVICE_SUPPORT}")
+message("+++++++++++CUSTOM_HMI_CLIENT_SUPPORT = ${CUSTOM_HMI_CLIENT_SUPPORT}")
+message("+++++++++++CUSTOM_DPO_SERVICE_SUPPORT = ${CUSTOM_DPO_SERVICE_SUPPORT}")
+if(CUSTOM_HOST_SERVICE_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_HOST_SERVICE__)
+endif()
+if(CUSTOM_TRANS_SERVICE_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_TRANS_SERVICE__)
+endif()
+if(CUSTOM_UCL_SERVICE_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_UCL_SERVICE__)
+endif()    
+if(CUSTOM_VDI_SERVICE_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_VDI_SERVICE__)        
+endif()
+if(CUSTOM_HMI_CLIENT_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_HMI_CLIENT__)
+    ADD_DEFINITIONS(-DSOA_HUT_REMOTE_CLIENTID)
+else()
+    ADD_DEFINITIONS(-DSOA_TBOX_LOCAL_VENDOR_CLIENT)
+endif()
+if(CUSTOM_DPO_SERVICE_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_DPO_SERVICE__)
+endif()
+if(CUSTOM_ANDROID_SUPPORT)
+    ADD_DEFINITIONS(-D__CUSTOM_ANDROID_SUPPORT__)
+endif()    
+# module enable/disable end
+
+# function enable/disable start
+set(SOMEIP_FUNCTION_SUPPORT "OFF") #设置启用SomeIP通道交互
+if(SOMEIP_FUNCTION_SUPPORT MATCHES "ON")
+ADD_DEFINITIONS(-D__SOMEIP_FUNCTION__) #策略
+endif ()
+# function enable/disable end
+
+# someip log open/close flag 
+set(SOMEIP_LOG OFF) 
+
+if(SOMEIP_LOG)
+    message("+++++++++++someip log = ${SOMEIP_LOG}") 
+else() 
+    message("+++++++++++someip log = ${SOMEIP_LOG}") 
+    ADD_DEFINITIONS(-DNO_SOMEIP_LOG) 
+endif()
+
+# vrpc log enable
+add_definitions(-D_DEBUG)
+
+
+if(${CUSTOM_CMAKE_SERIAL_TYPE} MATCHES "protobuf")
+    set (SYSILOADER_STATIC_LIB 
+    ${CMAKE_SOURCE_DIR}/build/sysi/engine/sysi4loader/proto_soc/libsysi4protosoc.a
+    ${FOUNDATION_LIB_PATH}/libprotobufd.a
+    )
+elseif(${CUSTOM_CMAKE_SERIAL_TYPE} MATCHES "json")
+    set (SYSILOADER_STATIC_LIB ${CMAKE_SOURCE_DIR}/build/sysi/engine/sysi4loader/json_soc/libsysi4jsonsoc.a)
+endif()
+
+# 使用dloen, 或直接连接实现库 
+message("+++++++++++use with CUSTOME_USE_DLSYM = ${CUSTOME_USE_DLSYM}")
+if(CUSTOME_USE_DLSYM) 
+    ADD_DEFINITIONS(-D__DLSYM__) 
+endif() 
+
+if(CUSTOME_USE_DLSYM) 
+    set(SYSILOADER_LIBRARY ${CMAKE_SOURCE_DIR}/build/sysi/engine/sysi4loader/libsysi4loader.a)
+    set(SOA_LIBRARY ${CMAKE_SOURCE_DIR}/build/soa/libsoa.a)
+else()
+    
+    set(SYSILOADER_LIBRARY 
+        ${CMAKE_SOURCE_DIR}/build/sysi/engine/sysi4loader/libsysi4loader.a
+        
+        ${SYSILOADER_STATIC_LIB}
+    )
+
+    set(SOA_LIBRARY 
+        ${CMAKE_SOURCE_DIR}/build/soa/libsoa.a
+        ${CMAKE_SOURCE_DIR}/build/soa/soa_impl/soa_soc_impl/libsoasoc.a
+        ${CMAKE_SOURCE_DIR}/foundation/arpc/lib/libarpc-static.a
+    )   
+endif()
+
+set(CORE_LIB_DIR ${CMAKE_SOURCE_DIR}/engine/lib)
+
+file(GLOB EXTERNAL_LIB_FILES "${CORE_LIB_DIR}/*")
+file(COPY ${EXTERNAL_LIB_FILES} DESTINATION ${EXTERNAL_LIB_BINARY_DIR})
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "QNX7")
+    set(GTEST_LIB "")
+else()
+    set(GTEST_LIB ""
+        #${FOUNDATION_LIB_PATH}/libgtest_maind.a
+        #${FOUNDATION_LIB_PATH}/libgtestd.a
+    )
+endif()
+
+if(CUSTOM_IMPORT_BASE_FULL_STATIC_LIB)
+    set(FOUNDATION_LIBRARY
+    ${FOUNDATION_LIB_PATH}/libadmkvstorage.a
+
+    ${FOUNDATION_LIB_PATH}/libadmdebug.a
+    ${FOUNDATION_LIB_PATH}/libadmsbuf.a
+    ${FOUNDATION_LIB_PATH}/libjson-c.a
+    ${FOUNDATION_LIB_PATH}/libadmlog.a
+    ${FOUNDATION_LIB_PATH}/libadmvector.a
+    ${FOUNDATION_LIB_PATH}/libadmmap.a
+    ${FOUNDATION_LIB_PATH}/libadmlist.a
+    ${FOUNDATION_LIB_PATH}/libadmqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmworkqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmlib.a
+    ${FOUNDATION_LIB_PATH}/libadm_config_tool.a
+    ${FOUNDATION_LIB_PATH}/libadm_minizip.a
+    ${FOUNDATION_LIB_PATH}/libadminiparser.a
+    ${FOUNDATION_LIB_PATH}/libadmkeylog.a
+
+    ${DTS_TOOL_LIB}
+    # ${FOUNDATION_LIB_PATH}/libprotobufd.a
+    # ${FOUNDATION_LIB_PATH}/libprotobuf-lited.a
+    ${GTEST_LIB}
+    
+#    ${FOUNDATION_LIB_PATH}/libcurl-d.a
+    ${FOUNDATION_LIB_PATH}/libleveldb.a
+    ${FOUNDATION_LIB_PATH}/libz.a
+#    ${FOUNDATION_LIB_PATH}/libcrypto-static.a
+#    ${FOUNDATION_LIB_PATH}/libmxml.a
+#    ${FOUNDATION_LIB_PATH}/libssl-static.a
+    ${FOUNDATION_LIB_PATH}/libiniparser.a
+
+    #${CMAKE_SOURCE_DIR}/arpc/lib/libarpc-static.a
+    #${CMAKE_SOURCE_DIR}/vrpc/libs/libjsoncpp.a
+    
+    ${FOUNDATION_LIB_PATH}/libadmos.a
+    )
+else()
+    set(FOUNDATION_LIBRARY
+    ${FOUNDATION_LIB_PATH}/libadmkvstorage.a
+
+    ${FOUNDATION_LIB_PATH}/libadmdebug.a
+    ${FOUNDATION_LIB_PATH}/libadmsbuf.a
+    ${FOUNDATION_LIB_PATH}/libjson-c.a
+    ${FOUNDATION_LIB_PATH}/libadmlog.a
+    ${FOUNDATION_LIB_PATH}/libadmvector.a
+    ${FOUNDATION_LIB_PATH}/libadmmap.a
+    ${FOUNDATION_LIB_PATH}/libadmlist.a
+    ${FOUNDATION_LIB_PATH}/libadmqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmworkqueue.a
+    ${FOUNDATION_LIB_PATH}/libadmlib.a
+    ${FOUNDATION_LIB_PATH}/libadm_config_tool.a
+    ${FOUNDATION_LIB_PATH}/libadminiparser.a
+    ${FOUNDATION_LIB_PATH}/libadm_minizip.a
+    ${FOUNDATION_LIB_PATH}/libadmkeylog.a
+
+    ${DTS_TOOL_LIB}
+    # ${FOUNDATION_LIB_PATH}/libprotobufd.a
+    # ${FOUNDATION_LIB_PATH}/libprotobuf-lited.a
+    ${GTEST_LIB}
+#   ${FOUNDATION_LIB_PATH}/libcurl-d.a
+    ${FOUNDATION_LIB_PATH}/libleveldb.a
+    ${FOUNDATION_LIB_PATH}/libz.a
+#    ${FOUNDATION_LIB_PATH}/libmxml.a
+    ${FOUNDATION_LIB_PATH}/libiniparser.a
+        
+    ${FOUNDATION_LIB_PATH}/libadmos.a
+    )
+#     set(FOUNDATION_LIBRARY "")
+#     message("+++++++++++Error: now cannot support shared foundaton library!!!!!!!!!!!")
+endif()
+
+# find Doxygen package
+find_package(Doxygen
+    REQUIRED dot
+    OPTIONAL_COMPONENTS mscgen dia)
+    
+#add_subdirectory(foundation)
+add_subdirectory(application/ems)
+add_subdirectory(oca)
+add_subdirectory(application/ocm)
+add_subdirectory(soa)
+add_subdirectory(sysi/engine)
+add_subdirectory(sysi/application)
+
+if(${CUSTOM_CMAKE_SYSTEM_NAME} MATCHES "Android")
+	add_subdirectory(sysi/jni)
+endif()
+
+#jni原因，此处编译可执行程序
+add_subdirectory(sysi/application/admSysi4DeployApp/sample)
+

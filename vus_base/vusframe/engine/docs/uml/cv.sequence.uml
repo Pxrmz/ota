@@ -1,0 +1,91 @@
+
+@startuml
+
+skinparam {
+    DiagramBorderThickness 1
+    RectangleBorderThickness 1
+    SequenceParticipantBorderThickness 1
+    SequenceReferenceBorderThickness 1
+    SequenceGroupBorderThickness 1
+    SequenceActorBorderThickness 1
+    sequenceMessageAlign center
+    Gainsboro true
+    hide footbox
+    Monochrome true
+    PartitionFontSize 10
+    RoundCorner 10
+}
+
+title  **检测版本时序图** 
+hide footbox
+
+participant 触发源
+
+box "读零件版本信息" 
+participant ECM
+participant DPO
+participant CVM
+participant EIM
+end box
+
+box "车云字段打包与解析" 
+participant CVS
+participant OTA_Client
+end box
+
+participant OTA_Server
+
+触发源->CVM:触发CVM检测版本
+note left: 检测版本触发方式
+activate 触发源
+activate CVM
+
+CVM->EIM:读取零件信息
+activate EIM
+CVM<--EIM:返回零件信息
+
+CVM->EIM:读取车辆大版本信息
+CVM<--EIM:返回车辆大版本信息
+deactivate EIM
+
+CVM->CVM:获取车云交互字段(时间戳、网络类型、\nsdkVersion、confVersion、\n所有模块版本号)
+
+CVM->CVS:CVM调用CVS
+activate CVS
+CVS->OTA_Client:序列化数据
+activate OTA_Client
+CVS<--OTA_Client:返回序列化数据
+deactivate OTA_Client
+
+CVS->OTA_Server:向云端获取新版本信息
+activate OTA_Server
+CVS<--OTA_Server:下发新版本信息
+deactivate OTA_Server
+
+CVS->OTA_Client:解析云端数据
+activate OTA_Client
+CVS<--OTA_Client:返回解析数据
+deactivate OTA_Client
+CVS->CVS:保存版本策略到数据库
+CVM<--CVS:返回响应数据
+deactivate CVS
+
+CVM->DPO:下载HMI策略文件
+activate DPO
+CVM<--DPO:返回下载结果
+deactivate DPO
+
+CVM->ECM:HMI策略文件解密验签拆包
+activate ECM
+CVM<--ECM:返回结果
+deactivate ECM
+
+CVM->CVM:生成基于UCM的文件传输服务器的链接\nhttp(s)协议的url、hash、size
+CVM->CVM:保存策略文件\n在UCM上的路径、url、hash、size到数据库
+
+触发源<--CVM:返回新版本信息
+deactivate CVM
+deactivate 触发源
+
+@enduml
+

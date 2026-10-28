@@ -1,0 +1,40 @@
+{
+    "status": 1000,
+    "msg": "成功",
+    "sign": "b905a2f6aee160f79d1379228e33e6bb208beeb8744283c8663f42b6edecbe7e",
+    "timestamp": 1639988941,
+    "data": {
+        "confVersion": "dd535ac882dc4784afd6bc6b2546d35e",
+        "fileObject": {
+            "fileName": "ECS_CFG.zip",
+            "url": "http://otadown-dev.evergrandeauto.com/download/package/model/350/6846aa1da43b4351abd4b60ca0b69fdd.zip",
+            "hash": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f",
+            "size": 1244183,
+            "fileSecurityInfo": {
+                "isEncrypt": 0,
+                "oriHash": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f",
+                "pkgKey": "pkgKey",
+                "segmentDecryptLen": 0,
+                "oriSize": 1247098,
+                "fileMetas": [
+                    {
+                        "size": 5569062980446935370,
+                        "checkSum": {
+                            "algorithm": 3,
+                            "value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+                        },
+                        "type": 2
+                    },
+                    {
+                        "size": 5569062980446935370,
+                        "checkSum": {
+                            "algorithm": 3,
+                            "value": "469a464d7d71bec36897e335cf43006f5429e975f34dd5e4d44fff70300e171f"
+                        },
+                        "type": 2
+                    }
+                ]
+            }
+        }
+    }
+}

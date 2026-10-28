@@ -1,0 +1,15 @@
+include (../cmake/ExternalProjectHelper)
+
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+	find_external_project_add(NAME vsomeip
+        BUILD_SHARED_LIBRARY
+	    DEPENDS "mosquitto"
+	    CONFIGURE_COMMANDS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+	    EXPORT_LIBRARIES ${CMAKE_INSTALL_PREFIX}/lib/libvsomeip3)
+else()
+	find_external_project_add(NAME vsomeip
+        BUILD_SHARED_LIBRARY
+	    DEPENDS "mosquitto"
+	    CONFIGURE_COMMANDS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+	    EXPORT_LIBRARIES ${CMAKE_INSTALL_PREFIX}/lib/libvsomeip3)
+endif()

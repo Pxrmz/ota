@@ -1,0 +1,27 @@
+{
+    "packageDesc": "TBox_OTA_Test_NAD_1",
+    "extParams": [],
+    "bigSrcVer": "V1.1.3",
+    "packageInfos": [
+        {
+            "dstVer": "V3.1.3",
+            "fileName": "filedownf0a5b14020b6450090ec0ad40ca5576c.zip",
+            "fileSize": 32418850,
+            "fileHash": "2b9db48b69bcbf41b1ed60872fc8f3e5b2d8f9ee68299685f4f5e02ae87fd6d2",
+            "packageType": 2,
+            "srcVer": "V2.0.1",
+            "updateObj": "0X01_0X16E2_0XD001"
+        },
+        {
+            "dstVer": "V3.1.3",
+            "fileName": "filedowncb5a6393f9dc4ffd864b53f703d8589e.zip",
+            "fileSize": 32418850,
+            "fileHash": "2b9db48b69bcbf41b1ed60872fc8f3e5b2d8f9ee68299685f4f5e02ae87fd6d2",
+            "packageType": 2,
+            "srcVer": "V2.0.1",
+            "updateObj": "0X01_0X16E2_0XD001"
+        }
+    ],
+    "bigDstVer": "V3.9",
+    "packageNum": 2
+}

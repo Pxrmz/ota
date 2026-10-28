@@ -1,0 +1,10 @@
+document_root .
+document_uploaddir .
+listening_ports 8082s
+
+# enable_keep_alive no
+ssl_certificate server.pem
+# num_threads 50
+# request_timeout_ms 30000
+# max_connections 100
+# insecure no
